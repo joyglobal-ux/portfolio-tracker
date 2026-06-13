@@ -1,0 +1,52 @@
+{
+  "_comment": "현재 보유 포지션. weight=평가비중(%), ret=현 보유분 수익률(%, 포트 수익률 아님), 원화 금액은 비노출.",
+  "asOf": "2026-06-12",
+  "holdings": [
+    {
+      "ticker": "000660", "name": "SK하이닉스", "tag": "코어", "tagColor": "hold",
+      "sector": "반도체/HBM", "weight": 36.1, "ret": 125.63, "credit": false,
+      "thesis": "HBM 2026 완판 + 엔비디아 70% + Q1 OPM 72%. 추세 대장(3M +124%)",
+      "stop": "하드스탑 없음 (코어). add는 FOMC 통과 후 20일선 안착 시 단계 분할",
+      "note": "삼성 HBM4 점유 잠식 '가격 증거' 나오면 합산비중 재검토"
+    },
+    {
+      "ticker": "MU", "name": "Micron", "tag": "게이트", "tagColor": "wait",
+      "sector": "반도체/HBM", "weight": 17.2, "ret": 21.12, "credit": false,
+      "thesis": "HBM 3사 과점 후발 + sold out. 6/24 FQ3 = 메모리 논리 GO/NO-GO",
+      "stop": "6/24 실적 내용 기준. NO-GO(데이터센터 수요 약화 숫자 확인) 시 정리 검토",
+      "note": "쿠션 +21%. 리스크 = 실적 미스 아니라 기대 미스(브로드컴 6/5 템플릿)"
+    },
+    {
+      "ticker": "005380", "name": "현대차", "tag": "매도 예정", "tagColor": "stop",
+      "sector": "자동차", "weight": 12.7, "ret": -9.40, "credit": false,
+      "thesis": "피지컬AI 테제로 진입 → 메모리 논리 밖 + 주도 테마 아님 + 20일선 아래",
+      "stop": "6/15 전량 매도. 반등은 출구 가격 개선일 뿐",
+      "note": "'오늘 새 현금으로 이걸 사겠는가?' — 아니면 매일 다시 사는 것"
+    },
+    {
+      "ticker": "000660C", "name": "SK하이닉스 (신용)", "tag": "전술 레버리지", "tagColor": "wait",
+      "sector": "반도체/HBM", "weight": 11.7, "ret": -0.33, "credit": true,
+      "thesis": "증권사 신용중단 대비 선확보 전술. 합산 하이닉스 47.8%(마지노선 60%)",
+      "stop": "종가 1,911,000 이탈 = 신용분 전량 정리 (본주 유지)",
+      "note": "확장(한도 10~20%)은 6/24 MU 게이트 통과 후 트리거 점등 시에만"
+    },
+    {
+      "ticker": "0193W0", "name": "삼성전자레버리지", "tag": "매도 예정", "tagColor": "stop",
+      "sector": "반도체", "weight": 5.1, "ret": -0.99, "credit": false,
+      "thesis": "+16% 반등으로 본전 도달 → 본전 출구. ETN = decay 차량",
+      "stop": "6/15 전량 매도. 메모리 익스포저는 하이닉스+MU로 이미 충분",
+      "note": "재진입은 본주로만 — 삼전/하이닉스 RS 역전 + 신고가 돌파 시"
+    },
+    {
+      "ticker": "281820", "name": "케이씨텍", "tag": "신규 · 장비", "tagColor": "go",
+      "sector": "반도체장비", "weight": 4.2, "ret": 0.11, "credit": false,
+      "thesis": "장비 로테이션 신규. 4주 박스(60~75k) 거래량 신고가 돌파. CMP+슬러리",
+      "stop": "종가 80,900 이탈 = 전량 (-7% 종가 기준). 목표 비중 10%",
+      "note": "불타기는 전고 89,700 종가 돌파 시에만. 하이닉스급 확신 아님 → 타이트"
+    }
+  ],
+  "cashWeight": 12.9,
+  "creditWeight": 11.7,
+  "currentBlendedReturn": 27.73,
+  "twrCumulative": 137.3
+}

@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>포트폴리오 저널 · Jay</title>
+<style>
+  :root{
+    --bg:#0f1117; --panel:#171a23; --panel2:#1e222e; --line:#2a2f3d;
+    --txt:#e8eaf0; --muted:#9aa3b2; --faint:#6b7280;
+    --go:#22c55e; --go-bg:#10331f; --stop:#ef4444; --stop-bg:#3a1518;
+    --wait:#f59e0b; --wait-bg:#3a2a0c; --hold:#60a5fa; --hold-bg:#15263f;
+    --accent:#7c8cff;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Pretendard","Segoe UI",sans-serif;
+    background:var(--bg); color:var(--txt); line-height:1.55; -webkit-font-smoothing:antialiased;
+    padding-bottom:50px;
+  }
+  .wrap{max-width:840px;margin:0 auto;padding:0 16px}
+  a{color:var(--accent);text-decoration:none}
+
+  header{background:linear-gradient(135deg,#1b2030,#11141d);border-bottom:1px solid var(--line);padding:22px 0 18px;margin-bottom:18px}
+  .htop{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap}
+  h1{font-size:21px;font-weight:800;letter-spacing:-.4px}
+  h1 .em{color:var(--accent)}
+  .hsub{font-size:12.5px;color:var(--muted);margin-top:3px}
+  .hmeta{font-size:11.5px;color:var(--faint);text-align:right;font-variant-numeric:tabular-nums}
+
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:16px}
+  .kpi{background:var(--panel2);border:1px solid var(--line);border-radius:11px;padding:11px 12px}
+  .kpi .k{font-size:11px;color:var(--muted)}
+  .kpi .v{font-size:21px;font-weight:800;font-variant-numeric:tabular-nums;margin-top:2px}
+  .kpi .s{font-size:11px;color:var(--faint);margin-top:1px}
+  .v.pos{color:var(--go)} .v.neg{color:var(--stop)}
+
+  section{margin:22px 0}
+  .stitle{display:flex;align-items:center;gap:8px;font-size:15.5px;font-weight:800;margin-bottom:11px;letter-spacing:-.2px}
+  .stitle .ico{width:24px;height:24px;border-radius:7px;display:grid;place-items:center;font-size:13px;background:var(--panel2);border:1px solid var(--line)}
+  .stitle small{font-weight:500;color:var(--muted);font-size:12px}
+
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:14px 15px}
+  .chartbox{position:relative;height:230px}
+  .legend{display:flex;flex-wrap:wrap;gap:14px;font-size:12px;color:var(--muted);margin-bottom:8px}
+  .legend span{display:flex;align-items:center;gap:5px}
+  .lg-line{width:15px;height:3px;border-radius:2px}
+
+  .twocol{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .donut-wrap{display:grid;grid-template-columns:140px 1fr;gap:12px;align-items:center}
+  .donut-box{position:relative;height:140px}
+  .wlist{font-size:12.5px}
+  .wlist .row{display:flex;align-items:center;gap:7px;padding:4px 0}
+  .dot{width:9px;height:9px;border-radius:2px;flex-shrink:0}
+  .wlist .nm{flex:1} .wlist .pct{color:var(--muted);font-variant-numeric:tabular-nums}
+
+  .pcard{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:13px 15px;border-left-width:4px;border-left-style:solid;margin-bottom:10px}
+  .pcard.go{border-left-color:var(--go)} .pcard.stop{border-left-color:var(--stop)}
+  .pcard.wait{border-left-color:var(--wait)} .pcard.hold{border-left-color:var(--hold)}
+  .ptop{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+  .pname{font-size:15px;font-weight:800}
+  .pname .code{font-size:11px;color:var(--faint);font-weight:500;margin-left:5px}
+  .ptag{font-size:10px;font-weight:800;padding:3px 8px;border-radius:6px;letter-spacing:.2px;white-space:nowrap}
+  .tag-go{background:var(--go-bg);color:#86efac} .tag-stop{background:var(--stop-bg);color:#fca5a5}
+  .tag-wait{background:var(--wait-bg);color:#fcd34d} .tag-hold{background:var(--hold-bg);color:#93c5fd}
+  .pmeta{font-size:11px;color:var(--faint);margin:3px 0 9px;font-variant-numeric:tabular-nums}
+  .pmeta .ret-pos{color:var(--go)} .pmeta .ret-neg{color:var(--stop)}
+  .prow{font-size:12px;display:flex;gap:7px;padding:2px 0}
+  .prow .k{color:var(--muted);min-width:36px;font-weight:600;flex-shrink:0}
+
+  .jrow{display:flex;gap:12px;padding:11px 0;border-bottom:1px solid var(--line)}
+  .jrow:last-child{border-bottom:none}
+  .jdate{min-width:52px;font-size:11px;color:var(--faint);padding-top:2px;font-variant-numeric:tabular-nums}
+  .jdate .pend{display:block;color:var(--wait);font-size:10px}
+  .jact{font-size:10px;font-weight:800;padding:2px 7px;border-radius:5px;letter-spacing:.3px}
+  .a-buy{background:var(--go-bg);color:#86efac} .a-sell{background:var(--stop-bg);color:#fca5a5}
+  .a-closed{background:#23262f;color:var(--muted)} .a-add{background:var(--hold-bg);color:#93c5fd}
+  .jname{font-weight:700;font-size:13px;margin-left:6px}
+  .jwhy{font-size:12px;color:var(--muted);margin-top:4px}
+  .jres{font-size:12px;margin-top:3px}
+  .jres .lab{color:var(--faint)}
+  .jretro{font-size:11.5px;color:var(--faint);margin-top:3px;padding-left:9px;border-left:2px solid var(--line)}
+
+  .chips{display:flex;flex-wrap:wrap;gap:8px}
+  .chip{background:var(--panel2);border:1px solid var(--line);border-radius:9px;padding:7px 11px;font-size:12px}
+  .chip b{font-weight:700} .chip .kind{font-size:10px;color:var(--accent);margin-left:5px}
+  .chip .trg{display:block;font-size:11px;color:var(--faint);margin-top:2px}
+
+  .prin{background:var(--panel2);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:10px;padding:11px 13px;margin-bottom:9px}
+  .prin .pt{font-size:13px;font-weight:700;margin-bottom:3px}
+  .prin .pb{font-size:12px;color:var(--muted)}
+
+  .annual{display:flex;gap:10px;margin-top:12px;padding-top:11px;border-top:1px solid var(--line)}
+  .ann{flex:1;background:var(--panel2);border:1px solid var(--line);border-radius:9px;padding:9px 11px}
+  .ann .yr{font-size:11px;color:var(--muted)}
+  .ann .rv{font-size:17px;font-weight:800;font-variant-numeric:tabular-nums;margin-top:1px}
+  .ann .nt{font-size:10.5px;color:var(--faint);margin-top:1px}
+
+  footer{margin-top:30px;padding-top:16px;border-top:1px solid var(--line);font-size:11px;color:var(--faint);text-align:center;line-height:1.7}
+
+  @media(max-width:680px){
+    .kpis{grid-template-columns:1fr 1fr}
+    .twocol{grid-template-columns:1fr}
+    .donut-wrap{grid-template-columns:120px 1fr}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="htop">
+      <div>
+        <h1>포트폴리오 <span class="em">저널</span></h1>
+        <div class="hsub" id="hsub">불러오는 중…</div>
+      </div>
+      <div class="hmeta" id="hmeta"></div>
+    </div>
+    <div class="kpis" id="kpis"></div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <section>
+    <div class="stitle"><span class="ico">📈</span>규모 vs 목표 <small>· 통장 잔고(입금 포함) — 지수 100 = 2025·08</small></div>
+    <div class="card">
+      <div class="legend">
+        <span><span class="lg-line" style="background:#378ADD"></span>규모 지수</span>
+        <span><span class="lg-line" style="background:#888780;border-top:2px dashed #888780;background:transparent;height:0"></span>목표 지수</span>
+      </div>
+      <div class="chartbox"><canvas id="sizeChart"></canvas></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="stitle"><span class="ico">🎯</span>성과 추이 <small>· 입금 제외 순수 운용 수익률(TWR)</small></div>
+    <div class="card">
+      <div class="legend">
+        <span><span class="lg-line" style="background:#BA7517"></span>누적 (2025·08~)</span>
+        <span><span class="lg-line" style="background:#1D9E75"></span>올해 (2026 YTD · 매년 리셋)</span>
+      </div>
+      <div class="chartbox" style="height:200px"><canvas id="twrChart"></canvas></div>
+      <div class="annual" id="annual"></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="stitle"><span class="ico">🥧</span>현재 비중</div>
+    <div class="card">
+      <div class="donut-wrap">
+        <div class="donut-box"><canvas id="donut"></canvas></div>
+        <div class="wlist" id="wlist"></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="stitle"><span class="ico">📍</span>포지션 카드 <small>· 지금 무엇을 보는가</small></div>
+    <div id="positions"></div>
+  </section>
+
+  <section>
+    <div class="stitle"><span class="ico">📓</span>투자 저널 <small>· 어디에 · 왜 · 결과</small></div>
+    <div class="card" id="journal"></div>
+  </section>
+
+  <section>
+    <div class="stitle"><span class="ico">👁️</span>워치리스트 <small>· 트리거 대기</small></div>
+    <div class="chips" id="watchlist"></div>
+  </section>
+
+  <section>
+    <div class="stitle"><span class="ico">⚖️</span>원칙</div>
+    <div id="principles"></div>
+  </section>
+
+  <footer id="footer"></footer>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+const C={txt:'#e8eaf0',muted:'#9aa3b2',faint:'#6b7280',grid:'rgba(154,163,178,0.12)',blue:'#378ADD',gray:'#888780',amber:'#BA7517',go:'#22c55e',stop:'#ef4444'};
+const fmt=n=>(n==null?'–':Number(n).toLocaleString('ko-KR'));
+const el=(t,c,h)=>{const e=document.createElement(t);if(c)e.className=c;if(h!=null)e.textContent=h;return e;};
+
+Promise.all([
+  fetch('data/meta.json').then(r=>r.json()),
+  fetch('data/equity.json').then(r=>r.json()),
+  fetch('data/positions.json').then(r=>r.json()),
+  fetch('data/journal.json').then(r=>r.json()),
+  fetch('data/watchlist.json').then(r=>r.json())
+]).then(([meta,eq,pos,jr,wl])=>{
+  renderHeader(meta);
+  renderSizeChart(eq);
+  renderTwrChart(eq);
+  renderAnnual(meta);
+  renderDonut(pos);
+  renderPositions(pos);
+  renderJournal(jr);
+  renderWatchlist(wl);
+  renderPrinciples(meta);
+  renderFooter(meta);
+}).catch(e=>{
+  document.getElementById('hsub').textContent='데이터 로드 실패: '+e.message;
+});
+
+function renderHeader(m){
+  document.getElementById('hsub').textContent='작전 '+m.operation+' · 다음 게이트 '+m.nextGate;
+  document.getElementById('hmeta').innerHTML='업데이트 '+m.lastUpdated+'<br>환율 '+fmt(m.fxRate)+' · 지수 '+m.indexBase;
+  const targetPct=Math.round(m.sizeIndex/m.targetIndex*100);
+  const kpis=[
+    {k:'규모 지수',v:m.sizeIndex.toFixed(0),s:m.indexBase,cls:''},
+    {k:'누적 성과 (2025·08~)',v:'+'+m.twrCumulative.toFixed(1)+'%',s:'입금 제외 TWR',cls:'pos'},
+    {k:'올해 (2026 YTD)',v:'+'+m.ytdReturn.toFixed(1)+'%',s:'6월까지',cls:'pos'},
+    {k:'목표 대비',v:targetPct+'%',s:'규모 '+m.sizeIndex.toFixed(0)+' / 목표 '+m.targetIndex.toFixed(0),cls:targetPct>=100?'pos':'neg'}
+  ];
+  const box=document.getElementById('kpis');
+  kpis.forEach(x=>{
+    const d=el('div','kpi');
+    d.appendChild(el('div','k',x.k));
+    d.appendChild(el('div','v '+x.cls,x.v));
+    d.appendChild(el('div','s',x.s));
+    box.appendChild(d);
+  });
+}
+
+function renderSizeChart(eq){
+  const L=eq.series.map(s=>s.month.slice(2));
+  new Chart(document.getElementById('sizeChart'),{
+    data:{labels:L,datasets:[
+      {type:'line',label:'규모',data:eq.series.map(s=>s.size),borderColor:C.blue,backgroundColor:C.blue,borderWidth:2.5,tension:.3,pointRadius:2,spanGaps:true},
+      {type:'line',label:'목표',data:eq.series.map(s=>s.target),borderColor:C.gray,backgroundColor:C.gray,borderWidth:1.8,borderDash:[5,4],tension:.1,pointRadius:0}
+    ]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>c.dataset.label+' '+c.parsed.y}}},
+      scales:{y:{grid:{color:C.grid},ticks:{color:C.faint,font:{size:10}}},x:{grid:{display:false},ticks:{color:C.faint,font:{size:9},maxRotation:0,autoSkip:true,maxTicksLimit:7}}}}
+  });
+}
+
+function renderTwrChart(eq){
+  const L=eq.series.map(s=>s.month.slice(2));
+  new Chart(document.getElementById('twrChart'),{
+    type:'line',
+    data:{labels:L,datasets:[
+      {label:'누적',data:eq.series.map(s=>s.twr),borderColor:C.amber,backgroundColor:'rgba(186,117,23,0.08)',borderWidth:2.5,tension:.3,pointRadius:2,fill:true,spanGaps:true},
+      {label:'올해',data:eq.series.map(s=>s.ytd),borderColor:'#1D9E75',backgroundColor:'#1D9E75',borderWidth:2,borderDash:[5,4],tension:.3,pointRadius:2,spanGaps:true}
+    ]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>c.dataset.label+' +'+(c.parsed.y-100).toFixed(1)+'%'}}},
+      scales:{y:{grid:{color:C.grid},ticks:{color:C.faint,font:{size:10}}},x:{grid:{display:false},ticks:{color:C.faint,font:{size:9},maxRotation:0,autoSkip:true,maxTicksLimit:7}}}}
+  });
+}
+
+function renderAnnual(m){
+  const box=document.getElementById('annual');
+  if(!box||!m.annual)return;
+  m.annual.forEach(a=>{
+    const d=el('div','ann');
+    d.appendChild(el('div','yr',a.year+'년'));
+    const rv=el('div','rv '+(a.ret>=0?'':'neg'));
+    rv.style.color=a.ret>=0?'var(--go)':'var(--stop)';
+    rv.textContent=(a.ret>=0?'+':'')+a.ret.toFixed(2)+'%';
+    d.appendChild(rv);
+    d.appendChild(el('div','nt',a.note));
+    box.appendChild(d);
+  });
+}
+
+const DCOL=['#378ADD','#D85A30','#639922','#BA7517','#7F77DD','#1D9E75','#888780'];
+function renderDonut(pos){
+  const items=pos.holdings.map(h=>({n:h.name,w:h.weight})).concat([{n:'현금',w:pos.cashWeight}]);
+  items.sort((a,b)=>b.w-a.w);
+  new Chart(document.getElementById('donut'),{
+    type:'doughnut',
+    data:{labels:items.map(i=>i.n),datasets:[{data:items.map(i=>i.w),backgroundColor:items.map((_,i)=>DCOL[i%DCOL.length]),borderWidth:0}]},
+    options:{responsive:true,maintainAspectRatio:false,cutout:'60%',plugins:{legend:{display:false}}}
+  });
+  const wl=document.getElementById('wlist');
+  items.forEach((it,i)=>{
+    const r=el('div','row');
+    const d=el('span','dot');d.style.background=DCOL[i%DCOL.length];
+    r.appendChild(d);
+    r.appendChild(el('span','nm',it.n));
+    r.appendChild(el('span','pct',it.w.toFixed(1)+'%'));
+    wl.appendChild(r);
+  });
+}
+
+function renderPositions(pos){
+  const box=document.getElementById('positions');
+  pos.holdings.forEach(h=>{
+    const c=el('div','pcard '+h.tagColor);
+    const top=el('div','ptop');
+    const nm=el('span','pname');nm.textContent=h.name;
+    const code=el('span','code');code.textContent=h.ticker.replace(/C$/,' 신용').replace(/[A-Z0-9]{6}$/,m=>m);
+    nm.appendChild(code);
+    top.appendChild(nm);
+    top.appendChild(el('span','ptag tag-'+h.tagColor,h.tag));
+    c.appendChild(top);
+    const retCls=h.ret>=0?'ret-pos':'ret-neg';
+    const meta=el('div','pmeta');
+    meta.innerHTML=h.sector+' · 비중 '+h.weight+'% · <span class="'+retCls+'">'+(h.ret>=0?'+':'')+h.ret+'%</span>'+(h.credit?' · 신용':'');
+    c.appendChild(meta);
+    [['테제',h.thesis],['손절',h.stop],['주의',h.note]].forEach(([k,v])=>{
+      const r=el('div','prow');
+      r.appendChild(el('span','k',k));
+      r.appendChild(el('span',null,v));
+      c.appendChild(r);
+    });
+    box.appendChild(c);
+  });
+}
+
+function renderJournal(jr){
+  const box=document.getElementById('journal');
+  const acls={BUY:'a-buy',SELL:'a-sell',CLOSED:'a-closed',ADD:'a-add',TRIM:'a-sell'};
+  jr.entries.forEach(e=>{
+    const row=el('div','jrow');
+    const dt=el('div','jdate');
+    dt.textContent=e.date.slice(5);
+    if(e.status==='pending'){const p=el('span','pend','예정');dt.appendChild(p);}
+    row.appendChild(dt);
+    const body=el('div');body.style.flex='1';
+    const head=el('div');
+    head.appendChild(el('span','jact '+(acls[e.action]||'a-closed'),e.action));
+    head.appendChild(el('span','jname',e.ticker));
+    body.appendChild(head);
+    body.appendChild(el('div','jwhy',e.why));
+    const res=el('div','jres');
+    res.innerHTML='<span class="lab">결과: </span>'+e.result;
+    body.appendChild(res);
+    if(e.retro){body.appendChild(el('div','jretro','회고 · '+e.retro));}
+    row.appendChild(body);
+    box.appendChild(row);
+  });
+}
+
+function renderWatchlist(wl){
+  const box=document.getElementById('watchlist');
+  wl.items.forEach(w=>{
+    const c=el('div','chip');
+    const t=el('b',null,w.name);
+    c.appendChild(t);
+    c.appendChild(el('span','kind',w.kind));
+    c.appendChild(el('span','trg',w.trigger));
+    box.appendChild(c);
+  });
+}
+
+function renderPrinciples(m){
+  const box=document.getElementById('principles');
+  (m.principles||[]).forEach(p=>{
+    const d=el('div','prin');
+    d.appendChild(el('div','pt',p.title));
+    d.appendChild(el('div','pb',p.body));
+    box.appendChild(d);
+  });
+}
+
+function renderFooter(m){
+  document.getElementById('footer').innerHTML='수치 SSOT: 구글 스프레드시트 (자산관리 시트) · 서사: 대화 기록<br>금액 지수화 — 실제 원화 비노출 · 업데이트 '+m.lastUpdated+' · Jay × Claude';
+}
+</script>
+</body>
+</html>

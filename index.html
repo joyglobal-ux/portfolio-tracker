@@ -104,6 +104,15 @@
   .jkind{font-size:10px;font-weight:800;padding:2px 6px;border-radius:5px;margin-left:6px}
   .k-win{background:var(--go-bg);color:#86efac} .k-loss{background:var(--stop-bg);color:#fca5a5}
   .k-pending{background:var(--wait-bg);color:#fcd34d} .k-active{background:var(--hold-bg);color:#93c5fd}
+  .k-miss{background:#3a2a0c;color:#fcd34d}
+  .jmiss{font-size:10.5px;font-weight:700;padding:2px 7px;border-radius:5px;background:var(--stop-bg);color:#fca5a5;margin-left:7px}
+
+  /* 올해의 실수 인사이트 */
+  .jinsight{background:var(--wait-bg);border:1px solid #5a4410;border-left:3px solid var(--wait);border-radius:11px;padding:12px 14px;margin-bottom:14px}
+  .ji-t{font-size:13px;font-weight:800;color:#fcd34d;margin-bottom:5px}
+  .ji-b{font-size:12.5px;color:var(--txt);line-height:1.55}
+  .ji-f{font-size:12px;color:#fcd34d;margin-top:8px;padding-top:8px;border-top:1px dashed #5a4410}
+  .ji-f b{color:#fde68a}
 
   /* watchlist cards */
   .wgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
@@ -360,21 +369,22 @@ function renderJournal(jr){
   const box=document.getElementById('journal');
   const pctOf=s=>{const m=(s||'').match(/[+\-]?\d+(?:\.\d+)?%/);return m?m[0]:'';};
   const acls={BUY:'a-buy',SELL:'a-sell',CLOSED:'a-closed',ADD:'a-add',TRIM:'a-sell',HOLD:'a-add'};
-  const kcls={win:'k-win',loss:'k-loss',pending:'k-pending',active:'k-active'};
-  const klab={win:'🏆 성공',loss:'📚 레슨',pending:'예정',active:'진행'};
+  const kcls={win:'k-win',loss:'k-loss',mistake:'k-miss',pending:'k-pending',active:'k-active'};
+  const klab={win:'🏆 성공',loss:'📚 레슨',mistake:'⚠️ 너무 일찍 매도',pending:'예정',active:'진행'};
+
+  if(jr.insight){
+    const ins=el('div','jinsight');
+    ins.innerHTML='<div class="ji-t">⚠️ '+jr.insight.title+'</div><div class="ji-b">'+jr.insight.body+'</div>'+
+      '<div class="ji-f"><b>고칠 룰 · </b>'+jr.insight.fix+'</div>';
+    box.appendChild(ins);
+  }
 
   const wins=jr.entries.filter(e=>e.kind==='win');
-  const lessons=jr.entries.filter(e=>e.lesson);
   const sum=el('div','jsum');
   const winRow=el('div','jsum-row');
   winRow.appendChild(el('span','jsum-lab win','🏆 주요 성공'));
   wins.forEach(w=>{const c=el('span','jchip');c.textContent=w.ticker.replace(/\s*\(.*\)/,'')+' '+pctOf(w.result);winRow.appendChild(c);});
   sum.appendChild(winRow);
-  const lesRow=el('div','jsum-row');
-  lesRow.style.display='block';
-  lesRow.appendChild(el('span','jsum-lab les','📚 핵심 레슨'));
-  lessons.forEach(l=>{const d=el('span','jles');d.innerHTML='<b>'+l.ticker.replace(/\s*\(.*\)/,'')+'</b> — '+l.lesson;lesRow.appendChild(d);});
-  sum.appendChild(lesRow);
   box.appendChild(sum);
 
   jr.entries.forEach(e=>{
@@ -391,6 +401,7 @@ function renderJournal(jr){
     body.appendChild(el('div','jwhy',e.why));
     const res=el('div','jres');
     res.innerHTML='<span class="lab">결과: </span>'+e.result;
+    if(e.missed){res.appendChild(el('span','jmiss','매도 후 '+e.missed));}
     body.appendChild(res);
     if(e.lesson){body.appendChild(el('div','jretro','레슨 · '+e.lesson));}
     row.appendChild(body);

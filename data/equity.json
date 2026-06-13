@@ -1,18 +1,114 @@
 {
-  "_comment": "월별 시계열. size=규모지수(평가액, 입금 포함, 2025-08=100), twr=누적성과지수(입금 제외, 추적 시작 이후), ytd=연도별 누적성과(매년 1월 100 리셋), target=목표지수(2025-08=100), monthly=월간 수익률(%), depositIdx=그 달 입출금(지수 포인트). 실제 원화 비노출.",
+  "_comment": "월별 시계열. size=규모지수(평가액, 입금 포함, 첫 행=100), twr=누적성과지수(입금 제외), ytd=연도별 누적성과(매년 1월 리셋), target=목표지수, monthly=월간 수익률(%), depositIdx=입출금(지수). 자동 갱신. 원화 비노출.",
   "base": "2025-08 = 100",
   "series": [
-    {"month": "2025-08", "size": 100.0, "twr": 102.6, "ytd": 102.62, "target": 100.0, "monthly": 2.62, "depositIdx": 0},
-    {"month": "2025-09", "size": 102.6, "twr": 111.6, "ytd": 111.60, "target": 106.4, "monthly": 8.75, "depositIdx": 0},
-    {"month": "2025-10", "size": 111.6, "twr": 122.8, "ytd": 122.84, "target": 112.9, "monthly": 10.07, "depositIdx": 0},
-    {"month": "2025-11", "size": 122.8, "twr": 115.5, "ytd": 115.46, "target": 119.3, "monthly": -6.00, "depositIdx": 0},
-    {"month": "2025-12", "size": 115.5, "twr": 123.8, "ytd": 123.85, "target": 125.7, "monthly": 7.26, "depositIdx": 0},
-    {"month": "2026-01", "size": 123.8, "twr": 136.5, "ytd": 110.18, "target": 132.2, "monthly": 10.18, "depositIdx": 0},
-    {"month": "2026-02", "size": 136.5, "twr": 144.5, "ytd": 116.69, "target": 137.5, "monthly": 5.91, "depositIdx": 7.8},
-    {"month": "2026-03", "size": 152.3, "twr": 139.5, "ytd": 112.64, "target": 142.8, "monthly": -3.47, "depositIdx": 0},
-    {"month": "2026-04", "size": 147.1, "twr": 193.2, "ytd": 156.00, "target": 148.1, "monthly": 38.50, "depositIdx": 11.3},
-    {"month": "2026-05", "size": 214.9, "twr": 260.9, "ytd": 210.63, "target": 153.4, "monthly": 35.02, "depositIdx": 7.3},
-    {"month": "2026-06", "size": 297.5, "twr": 237.3, "ytd": 191.62, "target": 158.7, "monthly": -9.02, "depositIdx": 35.7},
-    {"month": "2026-07", "size": 306.4, "twr": null, "ytd": null, "target": 164.0, "monthly": null, "depositIdx": 0}
+    {
+      "month": "2025-08",
+      "size": 100.0,
+      "twr": 102.6,
+      "ytd": 102.62,
+      "target": 100.0,
+      "monthly": 2.62,
+      "depositIdx": 0
+    },
+    {
+      "month": "2025-09",
+      "size": 102.6,
+      "twr": 111.6,
+      "ytd": 111.6,
+      "target": 106.4,
+      "monthly": 8.75,
+      "depositIdx": 0
+    },
+    {
+      "month": "2025-10",
+      "size": 111.6,
+      "twr": 122.8,
+      "ytd": 122.84,
+      "target": 112.9,
+      "monthly": 10.07,
+      "depositIdx": 0
+    },
+    {
+      "month": "2025-11",
+      "size": 122.8,
+      "twr": 115.5,
+      "ytd": 115.46,
+      "target": 119.3,
+      "monthly": -6.0,
+      "depositIdx": 0
+    },
+    {
+      "month": "2025-12",
+      "size": 115.5,
+      "twr": 123.8,
+      "ytd": 123.85,
+      "target": 125.7,
+      "monthly": 7.26,
+      "depositIdx": 0
+    },
+    {
+      "month": "2026-01",
+      "size": 123.8,
+      "twr": 136.5,
+      "ytd": 110.18,
+      "target": 132.2,
+      "monthly": 10.18,
+      "depositIdx": 0
+    },
+    {
+      "month": "2026-02",
+      "size": 136.5,
+      "twr": 144.5,
+      "ytd": 116.69,
+      "target": 137.5,
+      "monthly": 5.91,
+      "depositIdx": 7.8
+    },
+    {
+      "month": "2026-03",
+      "size": 152.3,
+      "twr": 139.5,
+      "ytd": 112.64,
+      "target": 142.8,
+      "monthly": -3.47,
+      "depositIdx": 0
+    },
+    {
+      "month": "2026-04",
+      "size": 147.1,
+      "twr": 193.2,
+      "ytd": 156.0,
+      "target": 148.1,
+      "monthly": 38.5,
+      "depositIdx": 11.3
+    },
+    {
+      "month": "2026-05",
+      "size": 214.9,
+      "twr": 260.9,
+      "ytd": 210.63,
+      "target": 153.4,
+      "monthly": 35.02,
+      "depositIdx": 7.3
+    },
+    {
+      "month": "2026-06",
+      "size": 297.5,
+      "twr": 237.3,
+      "ytd": 191.62,
+      "target": 158.7,
+      "monthly": -9.02,
+      "depositIdx": 35.7
+    },
+    {
+      "month": "2026-07",
+      "size": 306.4,
+      "twr": null,
+      "ytd": null,
+      "target": 164.0,
+      "monthly": null,
+      "depositIdx": 0
+    }
   ]
 }

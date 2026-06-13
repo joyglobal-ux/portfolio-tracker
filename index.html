@@ -107,6 +107,27 @@
   .k-miss{background:#3a2a0c;color:#fcd34d}
   .jmiss{font-size:10.5px;font-weight:700;padding:2px 7px;border-radius:5px;background:var(--stop-bg);color:#fca5a5;margin-left:7px}
 
+  /* 생각·결정 로그 */
+  .logfilter{display:flex;flex-wrap:wrap;gap:7px;align-items:center;margin-bottom:14px}
+  .lf-chip{font-size:12px;padding:5px 11px;border-radius:8px;background:var(--panel2);border:1px solid var(--line);color:var(--muted);cursor:pointer}
+  .lf-chip.on{background:var(--hold-bg);border-color:var(--hold);color:#93c5fd}
+  .lf-sel{margin-left:auto}
+  .lf-sel select{background:var(--panel2);border:1px solid var(--line);color:var(--txt);border-radius:8px;padding:6px 9px;font-size:12px;font-family:inherit}
+  .logthread-hd{font-size:12px;color:var(--accent);background:var(--panel2);border:1px solid var(--line);border-radius:9px;padding:8px 12px;margin-bottom:12px}
+  .logempty{font-size:12.5px;color:var(--faint);padding:12px}
+  .logrow{display:grid;grid-template-columns:50px 1fr;gap:0}
+  .logdate{text-align:right;padding:13px 11px 0 0;font-size:11px;color:var(--faint);font-variant-numeric:tabular-nums}
+  .logbody{border-left:2px solid var(--line);padding:0 0 16px 15px;position:relative}
+  .logdot{position:absolute;left:-7px;top:13px;width:11px;height:11px;border-radius:50%;border:2px solid var(--bg)}
+  .logcard{background:var(--panel);border:1px solid var(--line);border-left-width:3px;border-radius:10px;padding:11px 14px}
+  .lh{display:flex;align-items:center;gap:7px;margin-bottom:4px;flex-wrap:wrap}
+  .lt-lab{font-size:11px;font-weight:700}
+  .ltk{font-size:10.5px;padding:2px 7px;border-radius:6px;background:var(--panel2);color:var(--muted)}
+  .lv{font-size:10px;font-weight:800;padding:2px 7px;border-radius:5px;margin-left:auto;background:rgba(255,255,255,0.04)}
+  .logttl{font-size:13.5px;font-weight:700}
+  .logtxt{font-size:12.5px;color:var(--muted);margin-top:3px;line-height:1.55}
+  .logref{font-size:11px;color:var(--faint);margin-top:5px}
+
   /* 올해의 실수 인사이트 */
   .jinsight{background:var(--wait-bg);border:1px solid #5a4410;border-left:3px solid var(--wait);border-radius:11px;padding:12px 14px;margin-bottom:14px}
   .ji-t{font-size:13px;font-weight:800;color:#fcd34d;margin-bottom:5px}
@@ -205,7 +226,13 @@
   </section>
 
   <section>
-    <div class="stitle"><span class="ico">📓</span>투자 저널 <small>· 어디에 · 왜 · 결과</small></div>
+    <div class="stitle"><span class="ico">🧠</span>생각·결정 로그 <small>· 덮어쓰기 없이 쌓는 기록 — 생각→결정→결과</small></div>
+    <div class="logfilter" id="logFilter"></div>
+    <div id="logStream"></div>
+  </section>
+
+  <section>
+    <div class="stitle"><span class="ico">📓</span>투자 저널 <small>· 성공·레슨 하이라이트</small></div>
     <div class="card" id="journal"></div>
   </section>
 
@@ -235,8 +262,9 @@ Promise.all([
   fetch('data/equity.json').then(r=>r.json()),
   fetch('data/positions.json').then(r=>r.json()),
   fetch('data/journal.json').then(r=>r.json()),
-  fetch('data/watchlist.json').then(r=>r.json())
-]).then(([meta,eq,pos,jr,wl])=>{
+  fetch('data/watchlist.json').then(r=>r.json()),
+  fetch('data/log.json').then(r=>r.json())
+]).then(([meta,eq,pos,jr,wl,log])=>{
   renderHeader(meta);
   renderGoal(meta);
   renderSizeChart(eq);
@@ -244,6 +272,7 @@ Promise.all([
   renderAnnual(meta);
   renderDonut(pos);
   renderPositions(pos);
+  renderLog(log,pos);
   renderJournal(jr);
   renderWatchlist(wl);
   renderPrinciples(meta);
@@ -443,6 +472,68 @@ function renderPrinciples(m){
     d.appendChild(el('div','pb',p.body));
     box.appendChild(d);
   });
+}
+
+function renderLog(log,pos){
+  const names={'012330':'현대모비스'};
+  (pos.holdings||[]).forEach(h=>{names[h.ticker]=h.name;});
+  const TYPE={
+    thesis:{lab:'💡 생각',ac:'#60a5fa'},
+    decision:{lab:'⚡ 결정',ac:'#f59e0b'},
+    strategy:{lab:'📋 전략',ac:'#7c8cff'},
+    outcome:{lab:'📊 결과',ac:'#9aa3b2'},
+    note:{lab:'📌 메모',ac:'#9aa3b2'}
+  };
+  const VERD={correct:{t:'맞음',c:'#22c55e'},wrong:{t:'틀림',c:'#ef4444'},ongoing:{t:'진행',c:'#f59e0b'}};
+  const fb=document.getElementById('logFilter');
+  const stream=document.getElementById('logStream');
+  let fType='all',fTicker='all';
+
+  [['all','전체'],['thesis','생각'],['decision','결정'],['strategy','전략'],['outcome','결과']].forEach(p=>{
+    const c=el('span','lf-chip'+(p[0]==='all'?' on':''),p[1]);
+    c.dataset.t=p[0];
+    c.addEventListener('click',function(){fType=p[0];[].forEach.call(fb.querySelectorAll('.lf-chip'),function(x){x.classList.toggle('on',x.dataset.t===p[0]);});draw();});
+    fb.appendChild(c);
+  });
+  const tickers=[];
+  log.entries.forEach(e=>{if(e.ticker&&tickers.indexOf(e.ticker)<0)tickers.push(e.ticker);});
+  const sw=el('span','lf-sel');
+  const sel=document.createElement('select');
+  let opts='<option value="all">전체 종목</option>';
+  tickers.forEach(t=>{opts+='<option value="'+t+'">'+(names[t]||t)+'</option>';});
+  sel.innerHTML=opts;
+  sel.addEventListener('change',function(){fTicker=sel.value;draw();});
+  sw.appendChild(sel);fb.appendChild(sw);
+
+  function draw(){
+    stream.innerHTML='';
+    const rows=log.entries.filter(e=>(fType==='all'||e.type===fType)&&(fTicker==='all'||e.ticker===fTicker));
+    if(fTicker!=='all'){
+      stream.appendChild(el('div','logthread-hd','🧵 종목 스레드 — '+(names[fTicker]||fTicker)+' · 위가 최신, 아래로 과거'));
+    }
+    if(!rows.length){stream.appendChild(el('div','logempty','해당 조건의 기록이 없어.'));return;}
+    rows.forEach(e=>{
+      const cfg=TYPE[e.type]||TYPE.note;
+      let accent=cfg.ac;
+      if(e.type==='outcome'&&e.verdict&&VERD[e.verdict]){accent=VERD[e.verdict].c;}
+      const row=el('div','logrow');
+      const dt=el('div','logdate');dt.textContent=e.date.length>7?e.date.slice(5):e.date;
+      row.appendChild(dt);
+      const bw=el('div','logbody');
+      const dot=el('span','logdot');dot.style.background=accent;bw.appendChild(dot);
+      const card=el('div','logcard');card.style.borderLeftColor=accent;
+      const lh=el('div','lh');
+      const lab=el('span','lt-lab',cfg.lab);lab.style.color=accent;lh.appendChild(lab);
+      if(e.ticker){lh.appendChild(el('span','ltk',names[e.ticker]||e.ticker));}
+      if(e.type==='outcome'&&e.verdict&&VERD[e.verdict]){const v=el('span','lv',VERD[e.verdict].t);v.style.color=VERD[e.verdict].c;lh.appendChild(v);}
+      card.appendChild(lh);
+      card.appendChild(el('div','logttl',e.title));
+      if(e.body)card.appendChild(el('div','logtxt',e.body));
+      if(e.ref)card.appendChild(el('div','logref','↪ 과거 결정에 연결됨'));
+      bw.appendChild(card);row.appendChild(bw);stream.appendChild(row);
+    });
+  }
+  draw();
 }
 
 function renderFooter(m){

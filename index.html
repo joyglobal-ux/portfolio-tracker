@@ -82,10 +82,42 @@
   .jres .lab{color:var(--faint)}
   .jretro{font-size:11.5px;color:var(--faint);margin-top:3px;padding-left:9px;border-left:2px solid var(--line)}
 
-  .chips{display:flex;flex-wrap:wrap;gap:8px}
-  .chip{background:var(--panel2);border:1px solid var(--line);border-radius:9px;padding:7px 11px;font-size:12px}
-  .chip b{font-weight:700} .chip .kind{font-size:10px;color:var(--accent);margin-left:5px}
-  .chip .trg{display:block;font-size:11px;color:var(--faint);margin-top:2px}
+  /* goal banner */
+  .goal{background:var(--panel2);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:11px;padding:12px 14px;margin-bottom:12px}
+  .goal-top{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+  .goal-lab{font-size:13px;font-weight:700}
+  .goal-num{font-size:20px;font-weight:800;font-variant-numeric:tabular-nums}
+  .goal-num .g-sl{font-size:13px;color:var(--faint);font-weight:600}
+  .goal-bar{height:7px;background:var(--bg);border-radius:4px;margin:9px 0 6px;overflow:hidden}
+  .goal-fill{height:100%;background:var(--accent);border-radius:4px}
+  .goal-sub{font-size:11.5px;color:var(--muted)}
+
+  /* journal summary */
+  .jsum{margin-bottom:13px;padding-bottom:13px;border-bottom:1px solid var(--line)}
+  .jsum-row{display:flex;flex-wrap:wrap;gap:7px;align-items:center;margin-bottom:8px}
+  .jsum-row:last-child{margin-bottom:0}
+  .jsum-lab{font-size:11.5px;font-weight:800;min-width:78px}
+  .jsum-lab.win{color:#86efac} .jsum-lab.les{color:#fcd34d}
+  .jchip{font-size:11.5px;padding:3px 9px;border-radius:7px;background:var(--go-bg);color:#86efac;font-variant-numeric:tabular-nums}
+  .jles{font-size:11.5px;color:var(--muted);display:block;padding:3px 0}
+  .jles b{color:var(--txt);font-weight:700}
+  .jkind{font-size:10px;font-weight:800;padding:2px 6px;border-radius:5px;margin-left:6px}
+  .k-win{background:var(--go-bg);color:#86efac} .k-loss{background:var(--stop-bg);color:#fca5a5}
+  .k-pending{background:var(--wait-bg);color:#fcd34d} .k-active{background:var(--hold-bg);color:#93c5fd}
+
+  /* watchlist cards */
+  .wgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .wcard{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+  .wtop{display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin-bottom:6px}
+  .wname{font-size:14px;font-weight:800}
+  .wname .wcode{font-size:10.5px;color:var(--faint);font-weight:500;margin-left:4px}
+  .wtags{display:flex;gap:5px;flex-shrink:0}
+  .wmkt{font-size:9.5px;font-weight:800;padding:2px 6px;border-radius:5px}
+  .wmkt.kr{background:var(--hold-bg);color:#93c5fd} .wmkt.us{background:#2a1f3a;color:#c4b5fd}
+  .wstat{font-size:9.5px;font-weight:700;padding:2px 6px;border-radius:5px;background:var(--panel2);color:var(--muted)}
+  .wthesis{font-size:12px;color:var(--muted);line-height:1.5}
+  .wtrig{font-size:11.5px;color:var(--faint);margin-top:7px;padding-top:7px;border-top:1px dashed var(--line)}
+  .wtrig .wt-lab{color:var(--accent);font-weight:700}
 
   .prin{background:var(--panel2);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:10px;padding:11px 13px;margin-bottom:9px}
   .prin .pt{font-size:13px;font-weight:700;margin-bottom:3px}
@@ -101,7 +133,7 @@
 
   @media(max-width:680px){
     .kpis{grid-template-columns:1fr 1fr}
-    .twocol{grid-template-columns:1fr}
+    .twocol,.wgrid{grid-template-columns:1fr}
     .donut-wrap{grid-template-columns:120px 1fr}
   }
 </style>
@@ -125,10 +157,11 @@
 
   <section>
     <div class="stitle"><span class="ico">📈</span>규모 vs 목표 <small>· 통장 잔고(입금 포함) — 지수 100 = 2025·08</small></div>
+    <div class="goal" id="goal"></div>
     <div class="card">
       <div class="legend">
         <span><span class="lg-line" style="background:#378ADD"></span>규모 지수</span>
-        <span><span class="lg-line" style="background:#888780;border-top:2px dashed #888780;background:transparent;height:0"></span>목표 지수</span>
+        <span><span class="lg-line" style="background:#888780;border-top:2px dashed #888780;background:transparent;height:0"></span>연 목표 페이스</span>
       </div>
       <div class="chartbox"><canvas id="sizeChart"></canvas></div>
     </div>
@@ -167,8 +200,8 @@
   </section>
 
   <section>
-    <div class="stitle"><span class="ico">👁️</span>워치리스트 <small>· 트리거 대기</small></div>
-    <div class="chips" id="watchlist"></div>
+    <div class="stitle"><span class="ico">👁️</span>워치리스트 <small>· 핵심 thesis + 타점 · 살아있는 리스트(계속 채워나감)</small></div>
+    <div class="wgrid" id="watchlist"></div>
   </section>
 
   <section>
@@ -194,6 +227,7 @@ Promise.all([
   fetch('data/watchlist.json').then(r=>r.json())
 ]).then(([meta,eq,pos,jr,wl])=>{
   renderHeader(meta);
+  renderGoal(meta);
   renderSizeChart(eq);
   renderTwrChart(eq);
   renderAnnual(meta);
@@ -225,6 +259,16 @@ function renderHeader(m){
     d.appendChild(el('div','s',x.s));
     box.appendChild(d);
   });
+}
+
+function renderGoal(m){
+  const g=m.goal; if(!g)return;
+  const pct=Math.round(m.sizeIndex/g.targetIndex*100);
+  document.getElementById('goal').innerHTML=
+    '<div class="goal-top"><span class="goal-lab">🎯 북극성 — '+g.label+'</span>'+
+    '<span class="goal-num">'+m.sizeIndex.toFixed(0)+' <span class="g-sl">/ '+g.targetIndex.toLocaleString()+'</span></span></div>'+
+    '<div class="goal-bar"><div class="goal-fill" style="width:'+Math.min(pct,100)+'%"></div></div>'+
+    '<div class="goal-sub">진척 '+pct+'% · 목표 '+g.byYear+'년 (지수 10배 = 연 ~50% 페이스)</div>';
 }
 
 function renderSizeChart(eq){
@@ -314,23 +358,41 @@ function renderPositions(pos){
 
 function renderJournal(jr){
   const box=document.getElementById('journal');
-  const acls={BUY:'a-buy',SELL:'a-sell',CLOSED:'a-closed',ADD:'a-add',TRIM:'a-sell'};
+  const pctOf=s=>{const m=(s||'').match(/[+\-]?\d+(?:\.\d+)?%/);return m?m[0]:'';};
+  const acls={BUY:'a-buy',SELL:'a-sell',CLOSED:'a-closed',ADD:'a-add',TRIM:'a-sell',HOLD:'a-add'};
+  const kcls={win:'k-win',loss:'k-loss',pending:'k-pending',active:'k-active'};
+  const klab={win:'🏆 성공',loss:'📚 레슨',pending:'예정',active:'진행'};
+
+  const wins=jr.entries.filter(e=>e.kind==='win');
+  const lessons=jr.entries.filter(e=>e.lesson);
+  const sum=el('div','jsum');
+  const winRow=el('div','jsum-row');
+  winRow.appendChild(el('span','jsum-lab win','🏆 주요 성공'));
+  wins.forEach(w=>{const c=el('span','jchip');c.textContent=w.ticker.replace(/\s*\(.*\)/,'')+' '+pctOf(w.result);winRow.appendChild(c);});
+  sum.appendChild(winRow);
+  const lesRow=el('div','jsum-row');
+  lesRow.style.display='block';
+  lesRow.appendChild(el('span','jsum-lab les','📚 핵심 레슨'));
+  lessons.forEach(l=>{const d=el('span','jles');d.innerHTML='<b>'+l.ticker.replace(/\s*\(.*\)/,'')+'</b> — '+l.lesson;lesRow.appendChild(d);});
+  sum.appendChild(lesRow);
+  box.appendChild(sum);
+
   jr.entries.forEach(e=>{
     const row=el('div','jrow');
     const dt=el('div','jdate');
-    dt.textContent=e.date.slice(5);
-    if(e.status==='pending'){const p=el('span','pend','예정');dt.appendChild(p);}
+    dt.textContent=e.date.length>7?e.date.slice(5):e.date;
     row.appendChild(dt);
     const body=el('div');body.style.flex='1';
     const head=el('div');
     head.appendChild(el('span','jact '+(acls[e.action]||'a-closed'),e.action));
     head.appendChild(el('span','jname',e.ticker));
+    if(e.kind&&klab[e.kind]){head.appendChild(el('span','jkind '+kcls[e.kind],klab[e.kind]));}
     body.appendChild(head);
     body.appendChild(el('div','jwhy',e.why));
     const res=el('div','jres');
     res.innerHTML='<span class="lab">결과: </span>'+e.result;
     body.appendChild(res);
-    if(e.retro){body.appendChild(el('div','jretro','회고 · '+e.retro));}
+    if(e.lesson){body.appendChild(el('div','jretro','레슨 · '+e.lesson));}
     row.appendChild(body);
     box.appendChild(row);
   });
@@ -339,11 +401,21 @@ function renderJournal(jr){
 function renderWatchlist(wl){
   const box=document.getElementById('watchlist');
   wl.items.forEach(w=>{
-    const c=el('div','chip');
-    const t=el('b',null,w.name);
-    c.appendChild(t);
-    c.appendChild(el('span','kind',w.kind));
-    c.appendChild(el('span','trg',w.trigger));
+    const c=el('div','wcard');
+    const top=el('div','wtop');
+    const nm=el('span','wname');
+    nm.innerHTML=w.name+' <span class="wcode">'+w.ticker+'</span>';
+    top.appendChild(nm);
+    const tags=el('span','wtags');
+    const mk=el('span','wmkt '+(w.market==='US'?'us':'kr'));mk.textContent=w.market;
+    tags.appendChild(mk);
+    tags.appendChild(el('span','wstat',w.status));
+    top.appendChild(tags);
+    c.appendChild(top);
+    c.appendChild(el('div','wthesis',w.thesis));
+    const tr=el('div','wtrig');
+    tr.innerHTML='<span class="wt-lab">타점</span> '+w.trigger;
+    c.appendChild(tr);
     box.appendChild(c);
   });
 }

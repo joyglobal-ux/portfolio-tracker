@@ -2,6 +2,13 @@
   "_comment": "append-only 생각·결정 로그. 엔트리 불변 — 절대 수정·삭제 X, 생각 바뀌면 새 줄 추가. type: thesis(생각)/decision(결정)/strategy(전략)/outcome(결과)/note(메모). ref=결과가 가리키는 과거 결정 id. verdict=correct/wrong/ongoing. 최신순.",
   "entries": [
     {
+      "id": "20260613-sobujang-monitor",
+      "date": "2026-06-13", "type": "strategy", "ticker": null,
+      "title": "소부장 = 막차 경계, 눌림 후 재돌파 대기 (모니터 설정)",
+      "body": "반도체 소부장 24종이 이번 주 전부 동시에 +20~77% 수직 급등(3M +100~400% 위에). 섹터 블로우오프 = 국지적 천장 신호. 지금 진입은 막차 추격이고, 고베타 이름은 전부 extended거나 거래량 미확인. → 추격 대신 '눌림 후 재돌파'를 기다린다. 1순위 두산테스나·하나마이크론·대덕전자. 평일 15:40 모니터(sobujang-breakout-monitor) 설정. ※ ≤1개월 고베타 트레이드 바구니 — 코어와 분리, 타이트 손절.",
+      "ref": null
+    },
+    {
       "id": "20260613-hynix-credit",
       "date": "2026-06-13", "type": "decision", "ticker": "000660",
       "title": "신용 확대 34→47주 (마지막)",

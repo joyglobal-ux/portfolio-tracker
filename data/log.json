@@ -2,56 +2,56 @@
   "_comment": "append-only 생각·결정 로그. 엔트리 불변 — 절대 수정·삭제 X, 생각 바뀌면 새 줄 추가. type: thesis(생각)/decision(결정)/strategy(전략)/outcome(결과)/note(메모). ref=결과가 가리키는 과거 결정 id. verdict=correct/wrong/ongoing. 최신순.",
   "entries": [
     {
-      "id": "20260613-sobujang-monitor",
-      "date": "2026-06-13", "type": "strategy", "ticker": null,
+      "id": "20260615-sobujang-monitor",
+      "date": "2026-06-15", "type": "strategy", "ticker": null,
       "title": "소부장 = 막차 경계, 눌림 후 재돌파 대기 (모니터 설정)",
       "body": "반도체 소부장 24종이 이번 주 전부 동시에 +20~77% 수직 급등(3M +100~400% 위에). 섹터 블로우오프 = 국지적 천장 신호. 지금 진입은 막차 추격이고, 고베타 이름은 전부 extended거나 거래량 미확인. → 추격 대신 '눌림 후 재돌파'를 기다린다. 1순위 두산테스나·하나마이크론·대덕전자. 평일 15:40 모니터(sobujang-breakout-monitor) 설정. ※ ≤1개월 고베타 트레이드 바구니 — 코어와 분리, 타이트 손절.",
       "ref": null
     },
     {
-      "id": "20260613-hynix-credit",
-      "date": "2026-06-13", "type": "decision", "ticker": "000660",
+      "id": "20260615-hynix-credit",
+      "date": "2026-06-15", "type": "decision", "ticker": "000660",
       "title": "신용 확대 34→47주 (마지막)",
       "body": "하이닉스 강세에 불타기. 6/24 MU 실적이 업사이드 서프라이즈 날 것을 예상한 선제 베팅. 신용 매수는 여기서 종료 — 이후엔 현금으로만 매수. 합산 하이닉스 51%. backstop = 종가 1,911,000 이탈 시 신용분 전량 정리.",
       "ref": null, "verdict": "ongoing"
     },
     {
-      "id": "20260613-kc-add",
-      "date": "2026-06-13", "type": "decision", "ticker": "281820",
+      "id": "20260615-kc-add",
+      "date": "2026-06-15", "type": "decision", "ticker": "281820",
       "title": "케이씨텍 매집 300→600주",
       "body": "전고 89,700 돌파 전 매집(@~86,500). 물타기 아니라 의도적 사이징 — '투자하면 최소 포트 5% 이상 채워야 의미가 있다'. 슬러리 리커링(~40%)이 하방 방어하는 올라운더로 재정의, 80,900까지 보유.",
       "ref": "20260612-kc-buy", "verdict": "ongoing"
     },
     {
-      "id": "20260613-hd-trim",
-      "date": "2026-06-13", "type": "decision", "ticker": "005380",
+      "id": "20260615-hd-trim",
+      "date": "2026-06-15", "type": "decision", "ticker": "005380",
       "title": "현대차 부분 트림 131→57주",
       "body": "전량 매도 계획의 1차 집행. 잔여 57주(5.4%)도 청산 예정 — 진행 중. 메모리 논리 밖이라 보유 명분 없음.",
       "ref": null, "verdict": "ongoing"
     },
     {
-      "id": "20260613-samlev-sell",
-      "date": "2026-06-13", "type": "decision", "ticker": "0193W0",
+      "id": "20260615-samlev-sell",
+      "date": "2026-06-15", "type": "decision", "ticker": "0193W0",
       "title": "삼성전자레버리지 전량 매도",
       "body": "본전(-0.99%) 청산. ETN decay 차량 정리 — 6/15 계획을 앞당겨 집행. 메모리 베타는 하이닉스 본주로 충분. 헌법대로 깔끔한 출구.",
       "ref": null, "verdict": "correct"
     },
     {
-      "id": "20260613-sizing-rule",
-      "date": "2026-06-13", "type": "note", "ticker": null,
+      "id": "20260615-sizing-rule",
+      "date": "2026-06-15", "type": "note", "ticker": null,
       "title": "사이징 룰 — 투자하면 최소 5%",
       "body": "포지션은 포트의 최소 5% 이상 채워야 의미가 있다(아니면 맞아도 포트 성과에 안 잡힘). 집중(헌법 5조)의 실전 적용. ③전술 층에 정식 편입 후보.",
       "ref": null
     },
     {
-      "id": "20260613-const",
-      "date": "2026-06-13", "type": "note", "ticker": null,
+      "id": "20260615-const",
+      "date": "2026-06-15", "type": "note", "ticker": null,
       "title": "투자 헌법 6조 확정·잠금",
       "body": "① 미인대회(시장이 좋아할 것을 산다) ② 구조적 변화에만 베팅 ③ 공부와 베팅은 별개(다 알 수 있다는 건 과신, 모름은 사이즈·손절로 관리) ④ 스토리·숫자 정합성 ⑤ 집중하고 현금으로 방어 ⑥ 수익은 길게 손실은 짧게. 노션 3-Filter + 만다라트 기반. 3층 체계(헌법→전략→전술)의 최상위."
     },
     {
-      "id": "20260613-mistake",
-      "date": "2026-06-13", "type": "note", "ticker": null,
+      "id": "20260615-mistake",
+      "date": "2026-06-15", "type": "note", "ticker": null,
       "title": "올해 실수 패턴 발견 — 위너 조기 매도",
       "body": "SNDK(+15%)·LITE·삼성전기(+4%)를 작은 수익에 팔고 이후 각각 +200~300% 놓침. 반대로 웨이비스는 -12%까지 들고 가 손절. '수익은 길게 손실은 짧게'의 정반대. 고칠 룰: 위너엔 트레일링, 루저는 기계적 손절."
     },

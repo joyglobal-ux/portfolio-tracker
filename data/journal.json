@@ -7,92 +7,127 @@
   },
   "entries": [
     {
-      "date": "2025~보유", "action": "HOLD", "kind": "win", "ticker": "SK하이닉스 (본주)",
+      "date": "2025~보유",
+      "action": "HOLD",
+      "kind": "win",
+      "ticker": "SK하이닉스 (본주)",
       "why": "HBM 독점 + AI 메모리 슈퍼사이클. 일찍 사서 깔고 앉음",
       "result": "+125% (보유 중 · 최대 위너)",
       "lesson": "계좌 최대 수익은 추격이 아니라 '일찍 진입 + 추세 홀드'로 만들어졌다. 위너를 안 자른 유일한 사례 — 이게 방법론의 핵심 증거."
     },
     {
-      "date": "2026-06-15", "action": "SELL", "kind": "pending", "ticker": "삼성전자레버리지",
-      "why": "+16% 반등으로 본전 도달. ETN은 감쇠 차량 — 메모리 베타는 하이닉스 본주로 충분",
-      "result": "본전(-0.99%) 청산 예정"
-    },
-    {
-      "date": "2026-06-15", "action": "SELL", "kind": "pending", "ticker": "현대차",
-      "why": "20일선 아래 + 메모리 논리 밖 + 주도 테마 아님",
-      "result": "-9.4% 손절 예정 → 현금 ~30% 확보"
-    },
-    {
-      "date": "2026-06-12", "action": "BUY", "kind": "active", "ticker": "케이씨텍",
+      "date": "2026-06-12",
+      "action": "BUY",
+      "kind": "active",
+      "ticker": "케이씨텍",
       "why": "장비 로테이션 신규. 4주 박스 거래량 신고가 돌파, CMP+슬러리 소모품 매출",
       "result": "진행 중 · 손절 종가 80,900"
     },
     {
-      "date": "2026-06-09", "action": "CLOSED", "kind": "loss", "ticker": "현대모비스",
+      "date": "2026-06-09",
+      "action": "CLOSED",
+      "kind": "loss",
+      "ticker": "현대모비스",
       "why": "피지컬AI 테제로 진입 → 메모리 논리 밖 + 후행주",
       "result": "-15% 손절",
       "lesson": "테제(리포트)만 보고 샀지 가격(RS)을 안 봤다. 테마가 시장에서 이미 죽어 있었음 — 가장 비싼 수업."
     },
     {
-      "date": "2026-05", "action": "CLOSED", "kind": "loss", "ticker": "웨이비스",
+      "date": "2026-05",
+      "action": "CLOSED",
+      "kind": "loss",
+      "ticker": "웨이비스",
       "why": "국내 유일 GaN RF IDM, L-SAM 수주 — 확신에 비중 실음",
       "result": "-12% 손절",
       "lesson": "thesis 미확인(BEP 미달) 상태에서 비중 실었다가 손실. 위너는 일찍 자르면서 루저는 -12%까지 — 정확히 거꾸로."
     },
     {
-      "date": "2026-05-12", "action": "TRIM", "kind": "win", "ticker": "TSLA",
+      "date": "2026-05-12",
+      "action": "TRIM",
+      "kind": "win",
+      "ticker": "TSLA",
       "why": "FSD·로보택시 상용화 모멘텀. 포트 재편 위해 익절",
       "result": "+68.46% 익절",
       "lesson": "큰 위너는 모멘텀이 살아있는 한 끝까지 — 단 재진입 후보로 계속 추적."
     },
     {
-      "date": "2026-04", "action": "CLOSED", "kind": "mistake", "ticker": "삼성전기",
+      "date": "2026-04",
+      "action": "CLOSED",
+      "kind": "mistake",
+      "ticker": "삼성전기",
       "why": "AI 서버 MLCC/FC-BGA 수혜. 소형 포지션 비효율로 정리",
-      "result": "+4% 익절", "missed": "+300%",
+      "result": "+4% 익절",
+      "missed": "+300%",
       "lesson": "강한 구조를 작은 수익(+4%)에 버렸다 → 이후 +300%. 비효율이 아니라 사이즈를 키웠어야."
     },
     {
-      "date": "2026", "action": "CLOSED", "kind": "mistake", "ticker": "LITE (Lumentum)",
+      "date": "2026",
+      "action": "CLOSED",
+      "kind": "mistake",
+      "ticker": "LITE (Lumentum)",
       "why": "광통신/AI 인프라 배관",
-      "result": "익절", "missed": "+200%",
+      "result": "익절",
+      "missed": "+200%",
       "lesson": "AI 인프라 추세 초입에 팔았다 → 이후 +200%. 추세 종목은 익절 룰로 끊지 말 것."
     },
     {
-      "date": "2026-05-12", "action": "TRIM", "kind": "win", "ticker": "알멕",
+      "date": "2026-05-12",
+      "action": "TRIM",
+      "kind": "win",
+      "ticker": "알멕",
       "why": "SpaceX 스타십 부품 바이너리 이벤트. 발사 전 분할 익절",
       "result": "+44.8% 일부 익절",
       "lesson": "바이너리 이벤트(발사·발표)는 그 전에 절반 trim이 정석. 결과에 베팅하지 않는다."
     },
     {
-      "date": "2026-05-07", "action": "CLOSED", "kind": "win", "ticker": "AEHR",
+      "date": "2026-05-07",
+      "action": "CLOSED",
+      "kind": "win",
+      "ticker": "AEHR",
       "why": "SiC/GaN 웨이퍼 번인 장비 독점 + $41M 하이퍼스케일 AI 수주",
       "result": "+47.55% 익절"
     },
     {
-      "date": "2026-04-17", "action": "CLOSED", "kind": "win", "ticker": "SK하이닉스 신용(1차)",
+      "date": "2026-04-17",
+      "action": "CLOSED",
+      "kind": "win",
+      "ticker": "SK하이닉스 신용(1차)",
       "why": "HBM 주봉 반등 단기 베팅",
       "result": "+30% 익절",
       "lesson": "목표(+20%) 초과하자 청산 기한 전에 익절 — 신용은 욕심내지 않는다."
     },
     {
-      "date": "2026-04-07", "action": "CLOSED", "kind": "mistake", "ticker": "샌디스크 (SNDK)",
+      "date": "2026-04-07",
+      "action": "CLOSED",
+      "kind": "mistake",
+      "ticker": "샌디스크 (SNDK)",
       "why": "NAND 사이클 회복 + AI 스토리지 수요",
-      "result": "+15% 익절", "missed": "+200%",
+      "result": "+15% 익절",
+      "missed": "+200%",
       "lesson": "+15%에 청산 후 +200% 상승. 강한 추세는 고정 익절로 끊지 말 것. (지금 재진입 워치 중)"
     },
     {
-      "date": "2026-04-06", "action": "CLOSED", "kind": "win", "ticker": "로킷헬스케어",
+      "date": "2026-04-06",
+      "action": "CLOSED",
+      "kind": "win",
+      "ticker": "로킷헬스케어",
       "why": "AI 바이오프린팅 FDA EAP",
       "result": "+37% 익절",
       "lesson": "이해도 낮은 섹터(바이오)는 수익이 나도 빨리 정리 — 모르는 곳에 오래 머물지 않는다."
     },
     {
-      "date": "2026-04-08", "action": "CLOSED", "kind": "win", "ticker": "비츠로셀",
+      "date": "2026-04-08",
+      "action": "CLOSED",
+      "kind": "win",
+      "ticker": "비츠로셀",
       "why": "OPM 30% 돌파 = 멀티플 리레이팅 기대",
       "result": "+23% 익절"
     },
     {
-      "date": "2026-04-08", "action": "CLOSED", "kind": "win", "ticker": "리노공업",
+      "date": "2026-04-08",
+      "action": "CLOSED",
+      "kind": "win",
+      "ticker": "리노공업",
       "why": "WMCM 패키징 전환 + OPM 47% 소모품 구조",
       "result": "+14% 익절"
     }

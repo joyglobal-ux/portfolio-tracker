@@ -2,6 +2,13 @@
   "_comment": "append-only 생각·결정 로그. 엔트리 불변 — 절대 수정·삭제 X, 생각 바뀌면 새 줄 추가. type: thesis(생각)/decision(결정)/strategy(전략)/outcome(결과)/note(메모). ref=결과가 가리키는 과거 결정 id. verdict=correct/wrong/ongoing. 최신순.",
   "entries": [
     {
+      "id": "20260617-samsem-rule",
+      "date": "2026-06-17", "type": "decision", "ticker": "009150",
+      "title": "삼성전기 매도 규율 확정 — 물타기 폐기",
+      "body": "'빠지면 추가'(물타기) 폐기 확정. add는 눌림 후 거래량 재돌파에서만(헌법 3·웨이비스 레슨 준수). 구조 손절 20일선 종가 이탈. extended라 지금 추격 add 금지, 눌림 대기.",
+      "ref": "20260617-samsem", "verdict": "ongoing"
+    },
+    {
       "id": "20260617-hynix-lev",
       "date": "2026-06-17", "type": "decision", "ticker": "0193T0",
       "title": "SK하이닉스레버리지 매수 (5.7%)",

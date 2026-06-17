@@ -19,10 +19,14 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: 스냅샷 갱신
+      - name: 스냅샷 갱신 (규모·성과)
         env:
           SHEET_CSV_URL: ${{ secrets.SHEET_CSV_URL }}
         run: python scripts/update_snapshot.py
+      - name: 보유종목 갱신 (비중·수익률)
+        env:
+          HOLDINGS_CSV_URL: ${{ secrets.HOLDINGS_CSV_URL }}
+        run: python scripts/update_holdings.py
       - name: 변경분 커밋
         run: |
           git config user.name "portfolio-bot"

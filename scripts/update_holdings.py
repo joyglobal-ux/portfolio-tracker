@@ -75,6 +75,8 @@ def main():
         if "현금" in name:
             cash += wt
             continue
+        if wt <= 0:  # 매도 완료/히스토리 행(평가비중 0) 제외 — 활성 보유만
+            continue
         code = (cell(r, c_code) or "").strip()
         ret = ppct(cell(r, c_ret))
         credit = "신용" in name

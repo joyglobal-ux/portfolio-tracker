@@ -162,6 +162,11 @@
 
   footer{margin-top:30px;padding-top:16px;border-top:1px solid var(--line);font-size:11px;color:var(--faint);text-align:center;line-height:1.7}
 
+  .backlink{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;color:var(--muted);margin-bottom:12px;font-weight:600;transition:color .15s}
+  .backlink:hover{color:var(--accent)}
+  .morebtn{display:block;width:100%;margin-top:12px;padding:9px;background:var(--panel2);border:1px solid var(--line);border-radius:9px;color:var(--muted);font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;transition:border-color .15s,color .15s}
+  .morebtn:hover{border-color:var(--accent);color:var(--accent)}
+
   @media(max-width:680px){
     .kpis{grid-template-columns:1fr 1fr}
     .twocol,.wgrid{grid-template-columns:1fr}
@@ -173,6 +178,7 @@
 
 <header>
   <div class="wrap">
+    <a class="backlink" href="/">← Polaris 허브</a>
     <div class="htop">
       <div>
         <h1>포트폴리오 <span class="em">저널</span></h1>
@@ -418,7 +424,9 @@ function renderJournal(jr){
   sum.appendChild(winRow);
   box.appendChild(sum);
 
-  jr.entries.forEach(e=>{
+  const JR_LIMIT=4;
+  const extra=el('div','jhidden');extra.style.display='none';
+  jr.entries.forEach((e,i)=>{
     const row=el('div','jrow');
     const dt=el('div','jdate');
     dt.textContent=e.date.length>7?e.date.slice(5):e.date;
@@ -436,8 +444,18 @@ function renderJournal(jr){
     body.appendChild(res);
     if(e.lesson){body.appendChild(el('div','jretro','레슨 · '+e.lesson));}
     row.appendChild(body);
-    box.appendChild(row);
+    (i<JR_LIMIT?box:extra).appendChild(row);
   });
+  if(jr.entries.length>JR_LIMIT){
+    box.appendChild(extra);
+    const btn=el('button','morebtn','▾ 나머지 '+(jr.entries.length-JR_LIMIT)+'개 더보기');
+    btn.addEventListener('click',function(){
+      const open=extra.style.display==='none';
+      extra.style.display=open?'block':'none';
+      btn.textContent=open?'▴ 접기':'▾ 나머지 '+(jr.entries.length-JR_LIMIT)+'개 더보기';
+    });
+    box.appendChild(btn);
+  }
 }
 
 function renderWatchlist(wl){
@@ -487,12 +505,13 @@ function renderLog(log,pos){
   const VERD={correct:{t:'맞음',c:'#22c55e'},wrong:{t:'틀림',c:'#ef4444'},ongoing:{t:'진행',c:'#f59e0b'}};
   const fb=document.getElementById('logFilter');
   const stream=document.getElementById('logStream');
-  let fType='all',fTicker='all';
+  let fType='all',fTicker='all',expanded=false;
+  const LOG_LIMIT=4;
 
   [['all','전체'],['thesis','생각'],['decision','결정'],['strategy','전략'],['outcome','결과']].forEach(p=>{
     const c=el('span','lf-chip'+(p[0]==='all'?' on':''),p[1]);
     c.dataset.t=p[0];
-    c.addEventListener('click',function(){fType=p[0];[].forEach.call(fb.querySelectorAll('.lf-chip'),function(x){x.classList.toggle('on',x.dataset.t===p[0]);});draw();});
+    c.addEventListener('click',function(){fType=p[0];expanded=false;[].forEach.call(fb.querySelectorAll('.lf-chip'),function(x){x.classList.toggle('on',x.dataset.t===p[0]);});draw();});
     fb.appendChild(c);
   });
   const tickers=[];
@@ -502,7 +521,7 @@ function renderLog(log,pos){
   let opts='<option value="all">전체 종목</option>';
   tickers.forEach(t=>{opts+='<option value="'+t+'">'+(names[t]||t)+'</option>';});
   sel.innerHTML=opts;
-  sel.addEventListener('change',function(){fTicker=sel.value;draw();});
+  sel.addEventListener('change',function(){fTicker=sel.value;expanded=false;draw();});
   sw.appendChild(sel);fb.appendChild(sw);
 
   function draw(){
@@ -512,7 +531,8 @@ function renderLog(log,pos){
       stream.appendChild(el('div','logthread-hd','🧵 종목 스레드 — '+(names[fTicker]||fTicker)+' · 위가 최신, 아래로 과거'));
     }
     if(!rows.length){stream.appendChild(el('div','logempty','해당 조건의 기록이 없어.'));return;}
-    rows.forEach(e=>{
+    const shown=expanded?rows:rows.slice(0,LOG_LIMIT);
+    shown.forEach(e=>{
       const cfg=TYPE[e.type]||TYPE.note;
       let accent=cfg.ac;
       if(e.type==='outcome'&&e.verdict&&VERD[e.verdict]){accent=VERD[e.verdict].c;}
@@ -532,6 +552,11 @@ function renderLog(log,pos){
       if(e.ref)card.appendChild(el('div','logref','↪ 과거 결정에 연결됨'));
       bw.appendChild(card);row.appendChild(bw);stream.appendChild(row);
     });
+    if(rows.length>LOG_LIMIT){
+      const btn=el('button','morebtn',expanded?'▴ 접기':'▾ 나머지 '+(rows.length-LOG_LIMIT)+'개 더보기');
+      btn.addEventListener('click',function(){expanded=!expanded;draw();});
+      stream.appendChild(btn);
+    }
   }
   draw();
 }

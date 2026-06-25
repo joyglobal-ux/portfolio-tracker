@@ -2,9 +2,9 @@
   "_comment": "워치리스트 — 살아있는 문서. market(KR/US), thesis(핵심 투자 논리), trigger(기술적 타점), status. 억지로 채우지 않고 대화로 축적. 해외 종목 포함.",
   "items": [
     {
-      "name": "삼성전자", "ticker": "005930", "market": "KR", "status": "재진입",
+      "name": "삼성전자", "ticker": "005930", "market": "KR", "status": "재진입 완료(레버리지)",
       "thesis": "HBM4 캐치업(업계 최초 양산·11.7Gbps) + 파운드리 턴키 전략으로 SK하이닉스 독점에 균열. 메모리 2등의 밸류 리레이팅 베팅.",
-      "trigger": "삼전/하이닉스 1M 상대강도 역전 + 신고가 돌파(거래량) → 본주로만"
+      "trigger": "MU 통과 후 삼성전자레버리지(0193W0)로 재진입(6/25). 본주 추가 시 = 삼전/하이닉스 1M RS 역전 + 신고가 돌파."
     },
     {
       "name": "SanDisk", "ticker": "SNDK", "market": "US", "status": "신규 후보",

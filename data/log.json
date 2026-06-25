@@ -2,6 +2,54 @@
   "_comment": "append-only 생각·결정 로그. 엔트리 불변 — 절대 수정·삭제 X, 생각 바뀌면 새 줄 추가. type: thesis(생각)/decision(결정)/strategy(전략)/outcome(결과)/note(메모). ref=결과가 가리키는 과거 결정 id. verdict=correct/wrong/ongoing. 최신순.",
   "entries": [
     {
+      "id": "20260625-return-calc",
+      "date": "2026-06-25", "type": "note", "ticker": null,
+      "title": "수익률 계산법 — TWR(입금 제외)이 정답",
+      "body": "'올해 수익률'은 시트 연도별누적(월수익률 체이닝 = TWR, 입금 제외) = +144.8%, 인셉션 누적 +203%. 순자산 단순 성장률(+179%)은 올해 입금분이 수익으로 둔갑하므로 과대 — 입금 빼면 머니웨이티드는 그보다 낮다(큰 입금이 상승 직전에 들어와 덜 탐). 스킬 측정엔 TWR을 쓴다."
+    },
+    {
+      "id": "20260625-riskon",
+      "date": "2026-06-25", "type": "strategy", "ticker": null,
+      "title": "risk-on 모드 전환",
+      "body": "MU 6/24 blowout으로 메모리 추세 확정 → risk-on. 레버리지 ETN 보유 유지(정리 안 함), 현금 0~15% 오실레이션으로 레버리지 사이클 굴림. 가드: 레버리지는 욕심 안 내고 상승 폭발 시 선제 익절, 변동성 장 장기홀딩 금지. 다음 게이트 = 7월 2Q 잠정실적(삼성·하이닉스).",
+      "ref": null
+    },
+    {
+      "id": "20260625-samlev-rebuy",
+      "date": "2026-06-25", "type": "decision", "ticker": "0193W0",
+      "title": "삼성전자레버리지 재진입",
+      "body": "6/15 decay 이유로 전량 정리했던 종목을 MU 통과(추세 확정) 후 재진입. '레버리지는 추세 확인 후 재진입' 룰대로 — '본주로만/레버리지 금지' 룰 폐기. 삼전 본주 대신 레버리지로 단기 베타.",
+      "ref": "20260615-samlev-sell", "verdict": "ongoing"
+    },
+    {
+      "id": "20260624-hynixlev-rebuy",
+      "date": "2026-06-24", "type": "decision", "ticker": "0193T0",
+      "title": "SK하이닉스레버리지 재진입 (6/24~25)",
+      "body": "v1을 6/22 이벤트 전 +36% flatten 후, MU 컨센 돌파(추세 확정)로 재진입. 추세 확인 후 진입 + 상승 폭발 시 선제 익절 운영. 무이자라 시간제약 없으나 decay가 비용.",
+      "ref": "20260622-hynixlev-flatten", "verdict": "ongoing"
+    },
+    {
+      "id": "20260624-mu-go",
+      "date": "2026-06-24", "type": "outcome", "ticker": "MU",
+      "title": "마이크론 FQ3 — 컨센 돌파(GO)",
+      "body": "메모리 논리 GO/NO-GO 게이트 = GO. 컨센을 찢는 어닝으로 메모리 추세 확정. 하이닉스 본주 2,917,000 신고가 동반 급등. 작전계획 v2의 6/24 게이트 통과.",
+      "ref": "20260612-strat-v2", "verdict": "correct"
+    },
+    {
+      "id": "20260623-credit-add",
+      "date": "2026-06-23", "type": "decision", "ticker": "000660",
+      "title": "신용 추가 47→59주 (MU 이틀 전 폭락 매수)",
+      "body": "6/15에 '신용은 여기까지'라 했으나 번복. MU 발표 이틀 전 폭락 = 셀온 물량 소진 판단 → 본 발표 때 추가 셀온 안 나온다는 컨트래리언 리드로 플러시된 자리 매수. 결과 적중(6/24 GO). 게이트 전 add라 이벤트 리스크는 떠안음 — 운 아니라 읽기였으나 규율상 공격적.",
+      "ref": "20260615-hynix-credit", "verdict": "correct"
+    },
+    {
+      "id": "20260622-hynixlev-flatten",
+      "date": "2026-06-22", "type": "decision", "ticker": "0193T0",
+      "title": "SK하이닉스레버리지 v1 전량 익절 +36% (이벤트 전 flatten)",
+      "body": "MU 바이너리 이벤트 앞에서 레버리지 전량 청산. 이벤트 대응 원칙 — 레버리지+decay는 추세 꺾이면 2배로 때리니 바이너리 전에 던진다. 텍스트북 이벤트 매니지먼트. (이후 6/24~25 추세 확정되자 재진입)",
+      "ref": "20260617-hynix-lev", "verdict": "correct"
+    },
+    {
       "id": "20260618-kc-sell",
       "date": "2026-06-18", "type": "decision", "ticker": "281820",
       "title": "케이씨텍 전량 매도 — 주도주 로테이션",

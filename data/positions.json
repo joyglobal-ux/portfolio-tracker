@@ -1,6 +1,6 @@
 {
   "_comment": "현재 보유 포지션. weight=평가비중(%), ret=현 보유분 수익률(%, 포트 수익률 아님), 원화 비노출. 수동 갱신(자동 아님).",
-  "asOf": "2026-07-03",
+  "asOf": "2026-07-06",
   "holdings": [
     {
       "ticker": "000660",
@@ -8,25 +8,12 @@
       "tag": "코어",
       "tagColor": "hold",
       "sector": "반도체/HBM",
-      "weight": 7.6,
-      "ret": -8.32,
+      "weight": 11.2,
+      "ret": -9.47,
       "credit": false,
       "thesis": "HBM 2026 완판 + 엔비디아 70% + Q1 OPM 72%. 추세 대장, MU blowout 후 신고가 2,917,000.",
       "stop": "하드스탑 없음 (코어). 최대 위너 — 안 자른다(추세 홀드).",
       "note": "삼성 HBM4 점유 잠식 '가격 증거' 나오면 합산비중 재검토. 합산 본주+신용 60%, +레버리지 65%(마지노선 60 의식)."
-    },
-    {
-      "ticker": "MU",
-      "name": "Micron",
-      "tag": "게이트",
-      "tagColor": "wait",
-      "sector": "반도체/HBM",
-      "weight": 12.6,
-      "ret": 21.68,
-      "credit": false,
-      "thesis": "HBM 3사 과점 후발 + sold out. 6/24 FQ3 = 메모리 논리 GO/NO-GO.",
-      "stop": "6/24 실적 내용 기준. NO-GO(데이터센터 수요 약화) 시 정리 검토.",
-      "note": "쿠션 +22%. 리스크 = 실적 미스 아니라 기대 미스(브로드컴 6/5 템플릿)."
     },
     {
       "ticker": "000660C",
@@ -34,25 +21,25 @@
       "tag": "전술 레버리지",
       "tagColor": "wait",
       "sector": "반도체/HBM",
-      "weight": 13.2,
-      "ret": 10.33,
+      "weight": 13.1,
+      "ret": 6.6,
       "credit": true,
       "thesis": "증권사 신용중단 대비 선확보 전술. 하이닉스 강세에 불타기(34→59주, 6/23 MU 이틀 전 폭락=셀온 소진 판단으로 컨트래리언 추가).",
       "stop": "종가 1,911,000 이탈 = 신용분 전량 정리 (본주 유지).",
       "note": "6/24 MU 업사이드 서프라이즈 예상한 선제 베팅(본인 확인). 6/23 폭락에 47→59주 추가(셀온 소진 판단, 결과 GO로 적중). backstop = 종가 1,911,000. 합산 하이닉스 60%."
     },
     {
-      "ticker": "475300",
-      "name": "SOL 반도체전공정",
-      "tag": "신규",
-      "tagColor": "go",
-      "sector": "",
-      "weight": 8.5,
-      "ret": -16.39,
+      "ticker": "MU",
+      "name": "Micron",
+      "tag": "게이트",
+      "tagColor": "wait",
+      "sector": "반도체/HBM",
+      "weight": 13.0,
+      "ret": 21.68,
       "credit": false,
-      "thesis": "(자동 추가 — thesis 입력 필요)",
-      "stop": "",
-      "note": ""
+      "thesis": "HBM 3사 과점 후발 + sold out. 6/24 FQ3 = 메모리 논리 GO/NO-GO.",
+      "stop": "6/24 실적 내용 기준. NO-GO(데이터센터 수요 약화) 시 정리 검토.",
+      "note": "쿠션 +22%. 리스크 = 실적 미스 아니라 기대 미스(브로드컴 6/5 템플릿)."
     },
     {
       "ticker": "000660",
@@ -60,12 +47,25 @@
       "tag": "코어",
       "tagColor": "hold",
       "sector": "반도체/HBM",
-      "weight": 7.6,
-      "ret": -8.32,
+      "weight": 11.2,
+      "ret": -9.47,
       "credit": false,
       "thesis": "HBM 2026 완판 + 엔비디아 70% + Q1 OPM 72%. 추세 대장, MU blowout 후 신고가 2,917,000.",
       "stop": "하드스탑 없음 (코어). 최대 위너 — 안 자른다(추세 홀드).",
       "note": "삼성 HBM4 점유 잠식 '가격 증거' 나오면 합산비중 재검토. 합산 본주+신용 60%, +레버리지 65%(마지노선 60 의식)."
+    },
+    {
+      "ticker": "475300",
+      "name": "SOL 반도체전공정",
+      "tag": "신규",
+      "tagColor": "go",
+      "sector": "",
+      "weight": 8.1,
+      "ret": -22.23,
+      "credit": false,
+      "thesis": "(자동 추가 — thesis 입력 필요)",
+      "stop": "",
+      "note": ""
     },
     {
       "ticker": "005930",
@@ -73,16 +73,16 @@
       "tag": "신규",
       "tagColor": "go",
       "sector": "",
-      "weight": 3.6,
-      "ret": -6.29,
+      "weight": 3.8,
+      "ret": -3.72,
       "credit": false,
       "thesis": "(자동 추가 — thesis 입력 필요)",
       "stop": "",
       "note": ""
     }
   ],
-  "cashWeight": 17.0,
-  "creditWeight": 13.2,
+  "cashWeight": 13.7,
+  "creditWeight": 13.1,
   "currentBlendedReturn": 31.23,
   "twrCumulative": 137.3
 }

@@ -2,180 +2,264 @@
   "_comment": "append-only 생각·결정 로그. 엔트리 불변 — 절대 수정·삭제 X, 생각 바뀌면 새 줄 추가. type: thesis(생각)/decision(결정)/strategy(전략)/outcome(결과)/note(메모). ref=결과가 가리키는 과거 결정 id. verdict=correct/wrong/ongoing. 최신순.",
   "entries": [
     {
+      "id": "20260706-hynix-add",
+      "date": "2026-07-06",
+      "type": "decision",
+      "ticker": "000660",
+      "title": "하이닉스 add 실행 + 익스포저 100% 룰 신설 (노션 일지 #1)",
+      "body": "적대적 리뷰 후 결정: ① 하이닉스 43M add(리더 add, 삼전 직행은 선취매라 기각) — 7/6 하락일 13주 ~32M 일부 체결, 잔여 분할. ② 삼전은 7/7 잠정실적 + 트리거(1M RS 역전+신고가) 점등 시 확인 후. ③ SOL 절반 매도(7/7까지, 재인수 테스트 실패). ④ 익스포저 룰: net 상한 100%, 120%는 워시아웃·공포 국면만. 상세·반대논리는 노션 투자일지 #1."
+    },
+    {
+      "id": "20260706-liq-tracker",
+      "date": "2026-07-06",
+      "type": "note",
+      "ticker": null,
+      "title": "유동성 트래커 신설 — 물때 지표",
+      "body": "Polaris에 /liquidity/ 추가: Fed 순유동성(WALCL−TGA−RRP)·M2·HY스프레드·NFCI, FRED 자동. 현재 '순풍'. 주간 급배수 경보(-0.15$T/주) 백테스트: 3년 5회 전부 세금·분기말 드레인과 일치 — 4월 급락 전 -253B도 포착됐을 것. 단 유동성은 물때(레짐)지 타이밍 신호 아님."
+    },
+    {
       "id": "20260625-return-calc",
-      "date": "2026-06-25", "type": "note", "ticker": null,
+      "date": "2026-06-25",
+      "type": "note",
+      "ticker": null,
       "title": "수익률 계산법 — TWR(입금 제외)이 정답",
       "body": "'올해 수익률'은 시트 연도별누적(월수익률 체이닝 = TWR, 입금 제외) = +144.8%, 인셉션 누적 +203%. 순자산 단순 성장률(+179%)은 올해 입금분이 수익으로 둔갑하므로 과대 — 입금 빼면 머니웨이티드는 그보다 낮다(큰 입금이 상승 직전에 들어와 덜 탐). 스킬 측정엔 TWR을 쓴다."
     },
     {
       "id": "20260625-riskon",
-      "date": "2026-06-25", "type": "strategy", "ticker": null,
+      "date": "2026-06-25",
+      "type": "strategy",
+      "ticker": null,
       "title": "risk-on 모드 전환",
       "body": "MU 6/24 blowout으로 메모리 추세 확정 → risk-on. 레버리지 ETN 보유 유지(정리 안 함), 현금 0~15% 오실레이션으로 레버리지 사이클 굴림. 가드: 레버리지는 욕심 안 내고 상승 폭발 시 선제 익절, 변동성 장 장기홀딩 금지. 다음 게이트 = 7월 2Q 잠정실적(삼성·하이닉스).",
       "ref": null
     },
     {
       "id": "20260625-samlev-rebuy",
-      "date": "2026-06-25", "type": "decision", "ticker": "0193W0",
+      "date": "2026-06-25",
+      "type": "decision",
+      "ticker": "0193W0",
       "title": "삼성전자레버리지 재진입",
       "body": "6/15 decay 이유로 전량 정리했던 종목을 MU 통과(추세 확정) 후 재진입. '레버리지는 추세 확인 후 재진입' 룰대로 — '본주로만/레버리지 금지' 룰 폐기. 삼전 본주 대신 레버리지로 단기 베타.",
-      "ref": "20260615-samlev-sell", "verdict": "ongoing"
+      "ref": "20260615-samlev-sell",
+      "verdict": "ongoing"
     },
     {
       "id": "20260624-hynixlev-rebuy",
-      "date": "2026-06-24", "type": "decision", "ticker": "0193T0",
+      "date": "2026-06-24",
+      "type": "decision",
+      "ticker": "0193T0",
       "title": "SK하이닉스레버리지 재진입 (6/24~25)",
       "body": "v1을 6/22 이벤트 전 +36% flatten 후, MU 컨센 돌파(추세 확정)로 재진입. 추세 확인 후 진입 + 상승 폭발 시 선제 익절 운영. 무이자라 시간제약 없으나 decay가 비용.",
-      "ref": "20260622-hynixlev-flatten", "verdict": "ongoing"
+      "ref": "20260622-hynixlev-flatten",
+      "verdict": "ongoing"
     },
     {
       "id": "20260624-mu-go",
-      "date": "2026-06-24", "type": "outcome", "ticker": "MU",
+      "date": "2026-06-24",
+      "type": "outcome",
+      "ticker": "MU",
       "title": "마이크론 FQ3 — 컨센 돌파(GO)",
       "body": "메모리 논리 GO/NO-GO 게이트 = GO. 컨센을 찢는 어닝으로 메모리 추세 확정. 하이닉스 본주 2,917,000 신고가 동반 급등. 작전계획 v2의 6/24 게이트 통과.",
-      "ref": "20260612-strat-v2", "verdict": "correct"
+      "ref": "20260612-strat-v2",
+      "verdict": "correct"
     },
     {
       "id": "20260623-credit-add",
-      "date": "2026-06-23", "type": "decision", "ticker": "000660",
+      "date": "2026-06-23",
+      "type": "decision",
+      "ticker": "000660",
       "title": "신용 추가 47→59주 (MU 이틀 전 폭락 매수)",
       "body": "6/15에 '신용은 여기까지'라 했으나 번복. MU 발표 이틀 전 폭락 = 셀온 물량 소진 판단 → 본 발표 때 추가 셀온 안 나온다는 컨트래리언 리드로 플러시된 자리 매수. 결과 적중(6/24 GO). 게이트 전 add라 이벤트 리스크는 떠안음 — 운 아니라 읽기였으나 규율상 공격적.",
-      "ref": "20260615-hynix-credit", "verdict": "correct"
+      "ref": "20260615-hynix-credit",
+      "verdict": "correct"
     },
     {
       "id": "20260622-hynixlev-flatten",
-      "date": "2026-06-22", "type": "decision", "ticker": "0193T0",
+      "date": "2026-06-22",
+      "type": "decision",
+      "ticker": "0193T0",
       "title": "SK하이닉스레버리지 v1 전량 익절 +36% (이벤트 전 flatten)",
       "body": "MU 바이너리 이벤트 앞에서 레버리지 전량 청산. 이벤트 대응 원칙 — 레버리지+decay는 추세 꺾이면 2배로 때리니 바이너리 전에 던진다. 텍스트북 이벤트 매니지먼트. (이후 6/24~25 추세 확정되자 재진입)",
-      "ref": "20260617-hynix-lev", "verdict": "correct"
+      "ref": "20260617-hynix-lev",
+      "verdict": "correct"
     },
     {
       "id": "20260618-kc-sell",
-      "date": "2026-06-18", "type": "decision", "ticker": "281820",
+      "date": "2026-06-18",
+      "type": "decision",
+      "ticker": "281820",
       "title": "케이씨텍 전량 매도 — 주도주 로테이션",
       "body": "주도주 장세 판단. 1주 상대강도 하이닉스 +28% > 삼성전기 +22% > 케이씨텍 +19% — 케이씨텍(소부장)이 대형 주도주 대비 상대 약세. 89,700 전고는 돌파했으나 상대 약세 소부장을 익절(+~6%)하고 대형 주도주(삼성전기)로 갈아탐. 위너 조기매도 아니라 '오른 놈이 더 오른다'의 상대강도 적용 + 미인대회(헌법1).",
-      "ref": "20260612-kc-buy", "verdict": "correct"
+      "ref": "20260612-kc-buy",
+      "verdict": "correct"
     },
     {
       "id": "20260618-samsem-add",
-      "date": "2026-06-18", "type": "decision", "ticker": "009150",
+      "date": "2026-06-18",
+      "type": "decision",
+      "ticker": "009150",
       "title": "삼성전기 비중 채우기 (4.2→7.2%)",
       "body": "케이씨텍 매도분으로 갈아타기. ⚠️ 단 extended(20일선 +24.6%, 눌림 없음)에서 '동물적 감각'으로 add — 어제 잠근 '눌림 후 재돌파' 규율 이탈을 본인이 인정. 오늘은 5% 사이징 룰상 '비중 채우기'로 해석. 향후 추가 add는 눌림/조정에서만. 이번엔 올랐지만(운) 반복 시 평균회귀 물림 경계.",
-      "ref": "20260617-samsem", "verdict": "ongoing"
+      "ref": "20260617-samsem",
+      "verdict": "ongoing"
     },
     {
       "id": "20260617-samsem-rule",
-      "date": "2026-06-17", "type": "decision", "ticker": "009150",
+      "date": "2026-06-17",
+      "type": "decision",
+      "ticker": "009150",
       "title": "삼성전기 매도 규율 확정 — 물타기 폐기",
       "body": "'빠지면 추가'(물타기) 폐기 확정. add는 눌림 후 거래량 재돌파에서만(헌법 3·웨이비스 레슨 준수). 구조 손절 20일선 종가 이탈. extended라 지금 추격 add 금지, 눌림 대기.",
-      "ref": "20260617-samsem", "verdict": "ongoing"
+      "ref": "20260617-samsem",
+      "verdict": "ongoing"
     },
     {
       "id": "20260617-hynix-lev",
-      "date": "2026-06-17", "type": "decision", "ticker": "0193T0",
+      "date": "2026-06-17",
+      "type": "decision",
+      "ticker": "0193T0",
       "title": "SK하이닉스레버리지 매수 (5.7%)",
       "body": "본주 추세 확실(신고가·전 이평선 위) 판단해 2배 익스포저 증폭. 신용과 달리 무이자라 시간제약 없이 추세추종 add/trim. 손절 본주 종가 2,300,000. 합산 하이닉스 58%(본주+신용+레버). ※ 비용=변동성 decay(이자 아님) — 6/24 MU 횡보 시 본주 제자리여도 녹음, 추세 꺾임 신호에서 선제 대응.",
-      "ref": null, "verdict": "ongoing"
+      "ref": null,
+      "verdict": "ongoing"
     },
     {
       "id": "20260617-samsem",
-      "date": "2026-06-17", "type": "decision", "ticker": "009150",
+      "date": "2026-06-17",
+      "type": "decision",
+      "ticker": "009150",
       "title": "삼성전기 재진입 (4.2%)",
       "body": "한국 3대장(하이닉스·삼성전자·삼성전기) + 기판/FC-BGA 구조적 성장. 소부장(케이씨텍)→대형주 전환 고려. ⚠️ 본인도 '왜 또 샀을까' 인정. 손절 미설정 + '빠지면 추가' 계획 = 웨이비스 물타기 패턴 경고(헌법 3 위반). extended 진입(20일선 +24%·3M +400%). 손절선 설정 + 물타기 금지 필요.",
-      "ref": null, "verdict": "ongoing"
+      "ref": null,
+      "verdict": "ongoing"
     },
     {
       "id": "20260617-strat",
-      "date": "2026-06-17", "type": "strategy", "ticker": null,
+      "date": "2026-06-17",
+      "type": "strategy",
+      "ticker": null,
       "title": "반도체 비중 확대 방향 (~90%) + 광통신 편입 예정",
       "body": "하이닉스 중심 반도체 90%까지 의향(본주+신용+레버+ADR 시 모두 동일 베팅 — 마지노선 의식). 소부장(케이씨텍) 줄이고 대형 기판(삼성전기)으로 무게중심 이동 고려. 광통신(AI 인프라) 글로벌 1종목 편입 예정 — LITE 조기매도(+200% 놓침) 분야 재진입.",
       "ref": null
     },
     {
       "id": "20260615-sobujang-monitor",
-      "date": "2026-06-15", "type": "strategy", "ticker": null,
+      "date": "2026-06-15",
+      "type": "strategy",
+      "ticker": null,
       "title": "소부장 = 막차 경계, 눌림 후 재돌파 대기 (모니터 설정)",
       "body": "반도체 소부장 24종이 이번 주 전부 동시에 +20~77% 수직 급등(3M +100~400% 위에). 섹터 블로우오프 = 국지적 천장 신호. 지금 진입은 막차 추격이고, 고베타 이름은 전부 extended거나 거래량 미확인. → 추격 대신 '눌림 후 재돌파'를 기다린다. 1순위 두산테스나·하나마이크론·대덕전자. 평일 15:40 모니터(sobujang-breakout-monitor) 설정. ※ ≤1개월 고베타 트레이드 바구니 — 코어와 분리, 타이트 손절.",
       "ref": null
     },
     {
       "id": "20260615-hynix-credit",
-      "date": "2026-06-15", "type": "decision", "ticker": "000660",
+      "date": "2026-06-15",
+      "type": "decision",
+      "ticker": "000660",
       "title": "신용 확대 34→47주 (마지막)",
       "body": "하이닉스 강세에 불타기. 6/24 MU 실적이 업사이드 서프라이즈 날 것을 예상한 선제 베팅. 신용 매수는 여기서 종료 — 이후엔 현금으로만 매수. 합산 하이닉스 51%. backstop = 종가 1,911,000 이탈 시 신용분 전량 정리.",
-      "ref": null, "verdict": "ongoing"
+      "ref": null,
+      "verdict": "ongoing"
     },
     {
       "id": "20260615-kc-add",
-      "date": "2026-06-15", "type": "decision", "ticker": "281820",
+      "date": "2026-06-15",
+      "type": "decision",
+      "ticker": "281820",
       "title": "케이씨텍 매집 300→600주",
       "body": "전고 89,700 돌파 전 매집(@~86,500). 물타기 아니라 의도적 사이징 — '투자하면 최소 포트 5% 이상 채워야 의미가 있다'. 슬러리 리커링(~40%)이 하방 방어하는 올라운더로 재정의, 80,900까지 보유.",
-      "ref": "20260612-kc-buy", "verdict": "ongoing"
+      "ref": "20260612-kc-buy",
+      "verdict": "ongoing"
     },
     {
       "id": "20260615-hd-trim",
-      "date": "2026-06-15", "type": "decision", "ticker": "005380",
+      "date": "2026-06-15",
+      "type": "decision",
+      "ticker": "005380",
       "title": "현대차 부분 트림 131→57주",
       "body": "전량 매도 계획의 1차 집행. 잔여 57주(5.4%)도 청산 예정 — 진행 중. 메모리 논리 밖이라 보유 명분 없음.",
-      "ref": null, "verdict": "ongoing"
+      "ref": null,
+      "verdict": "ongoing"
     },
     {
       "id": "20260615-samlev-sell",
-      "date": "2026-06-15", "type": "decision", "ticker": "0193W0",
+      "date": "2026-06-15",
+      "type": "decision",
+      "ticker": "0193W0",
       "title": "삼성전자레버리지 전량 매도",
       "body": "본전(-0.99%) 청산. ETN decay 차량 정리 — 6/15 작전계획대로 집행. 메모리 베타는 하이닉스 본주로 충분. 헌법대로 깔끔한 출구.",
-      "ref": null, "verdict": "correct"
+      "ref": null,
+      "verdict": "correct"
     },
     {
       "id": "20260615-sizing-rule",
-      "date": "2026-06-15", "type": "note", "ticker": null,
+      "date": "2026-06-15",
+      "type": "note",
+      "ticker": null,
       "title": "사이징 룰 — 투자하면 최소 5%",
       "body": "포지션은 포트의 최소 5% 이상 채워야 의미가 있다(아니면 맞아도 포트 성과에 안 잡힘). 집중(헌법 5조)의 실전 적용. ③전술 층에 정식 편입 후보.",
       "ref": null
     },
     {
       "id": "20260615-const",
-      "date": "2026-06-15", "type": "note", "ticker": null,
+      "date": "2026-06-15",
+      "type": "note",
+      "ticker": null,
       "title": "투자 헌법 6조 확정·잠금",
       "body": "① 미인대회(시장이 좋아할 것을 산다) ② 구조적 변화에만 베팅 ③ 공부와 베팅은 별개(다 알 수 있다는 건 과신, 모름은 사이즈·손절로 관리) ④ 스토리·숫자 정합성 ⑤ 집중하고 현금으로 방어 ⑥ 수익은 길게 손실은 짧게. 노션 3-Filter + 만다라트 기반. 3층 체계(헌법→전략→전술)의 최상위."
     },
     {
       "id": "20260615-mistake",
-      "date": "2026-06-15", "type": "note", "ticker": null,
+      "date": "2026-06-15",
+      "type": "note",
+      "ticker": null,
       "title": "올해 실수 패턴 발견 — 위너 조기 매도",
       "body": "SNDK(+15%)·LITE·삼성전기(+4%)를 작은 수익에 팔고 이후 각각 +200~300% 놓침. 반대로 웨이비스는 -12%까지 들고 가 손절. '수익은 길게 손실은 짧게'의 정반대. 고칠 룰: 위너엔 트레일링, 루저는 기계적 손절."
     },
     {
       "id": "20260612-strat-v2",
-      "date": "2026-06-12", "type": "strategy", "ticker": null,
+      "date": "2026-06-12",
+      "type": "strategy",
+      "ticker": null,
       "title": "6월 작전계획 v2 — 방어→재집중",
       "body": "약한 꼬리(현대차·삼성레버리지) 정리, 하이닉스 코어 + 케이씨텍(장비 로테이션)으로 재집중. 현금 ~30% 확보. 게이트: 6/16~17 FOMC, 6/24 마이크론. 모든 add는 게이트 통과 후."
     },
     {
       "id": "20260612-kc-thesis",
-      "date": "2026-06-12", "type": "thesis", "ticker": "281820",
+      "date": "2026-06-12",
+      "type": "thesis",
+      "ticker": "281820",
       "title": "케이씨텍 — 장비 로테이션 1순위",
       "body": "4주 박스(60~75k) 거래량 신고가 돌파 + CMP 슬러리 소모품 매출로 순수 장비주보다 실적 변동성 낮음. 단 하이닉스급 확신은 아님 → 타이트 손절로 받는다. 원익IPS는 상한가 폭등으로 추격 불가라 차선."
     },
     {
       "id": "20260612-kc-buy",
-      "date": "2026-06-12", "type": "decision", "ticker": "281820",
+      "date": "2026-06-12",
+      "type": "decision",
+      "ticker": "281820",
       "title": "케이씨텍 신규 매수",
       "body": "300주 @87,000, 목표 비중 10%. 손절 종가 80,900(-7% 종가 기준). 불타기는 전고 89,700 종가 돌파 시에만. 눌림 물타기 금지.",
-      "ref": null, "verdict": "ongoing"
+      "ref": null,
+      "verdict": "ongoing"
     },
     {
       "id": "20260612-hynix-thesis",
-      "date": "2026-06-12", "type": "thesis", "ticker": "000660",
+      "date": "2026-06-12",
+      "type": "thesis",
+      "ticker": "000660",
       "title": "SK하이닉스 — 삼성 퀄 통과에도 코어 유지",
       "body": "삼성 HBM4 엔비디아·AMD 퀄 통과(독점 첫 균열 신호)에도 시장은 하이닉스를 더 선호. 1주일간 본주가 조정받았지만 3M +124%로 여전히 추세 대장. 코어 유지, add는 FOMC 통과 후 20일선 안착 시. 점유 잠식이 '가격'으로 확인되면 합산비중 재검토."
     },
     {
       "id": "20260609-mobis-out",
-      "date": "2026-06-09", "type": "outcome", "ticker": "012330",
+      "date": "2026-06-09",
+      "type": "outcome",
+      "ticker": "012330",
       "title": "현대모비스 -15% 손절",
       "body": "피지컬AI 테제로 진입했으나 메모리 논리 밖 + 후행주. 회고: 테제(리포트)만 보고 가격(RS)을 안 봤다. 테마가 시장에서 이미 죽어 있었음(두산로보틱스 -33%). 헌법 ④(정합성)·가격 우선 위반.",
-      "ref": null, "verdict": "wrong"
+      "ref": null,
+      "verdict": "wrong"
     }
   ]
 }

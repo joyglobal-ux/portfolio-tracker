@@ -93,13 +93,15 @@ def main():
 
     with open(POS, encoding="utf-8") as f:
         pos = json.load(f)
-    existing = {h["ticker"]: h for h in pos.get("holdings", [])}
+    # 키 = 티커|종목명 — 같은 티커의 다중 계좌 행(예: 본주 vs "(2nd)")이 서로 덮어쓰지 않게.
+    # (티커만 쓰면 000660 두 행이 한 객체로 합쳐져 본주가 증발하는 버그 — 2026-07-06 수정)
+    existing = {f'{h["ticker"]}|{h["name"]}': h for h in pos.get("holdings", [])}
 
     merged = []
     for sh in sheet:
-        if sh["ticker"] in existing:
-            h = existing[sh["ticker"]]  # thesis/stop/note/tag/sector 보존
-            h["name"] = sh["name"]
+        key = f'{sh["ticker"]}|{sh["name"]}'
+        if key in existing:
+            h = existing[key]  # thesis/stop/note/tag/sector 보존
             h["weight"] = sh["weight"]
             h["ret"] = sh["ret"]
             h["credit"] = sh["credit"]

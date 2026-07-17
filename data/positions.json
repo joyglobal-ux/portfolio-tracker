@@ -1,6 +1,6 @@
 {
   "_comment": "현재 보유 포지션. weight=평가비중(%), ret=현 보유분 수익률(%, 포트 수익률 아님), 원화 비노출. 수동 갱신(자동 아님).",
-  "asOf": "2026-07-16",
+  "asOf": "2026-07-17",
   "holdings": [
     {
       "ticker": "000660",
@@ -34,7 +34,7 @@
       "tag": "전술 레버리지",
       "tagColor": "wait",
       "sector": "반도체/HBM",
-      "weight": 14.2,
+      "weight": 14.1,
       "ret": -13.68,
       "credit": true,
       "thesis": "증권사 신용중단 대비 선확보 전술. 하이닉스 강세에 불타기(34→59주, 6/23 MU 이틀 전 폭락=셀온 소진 판단으로 컨트래리언 추가).",
@@ -68,8 +68,8 @@
       "note": "현재 RS 스프레드 -17%p(사이클 트래커 상시 감시). blowout+점등 시 확인 후 매수."
     }
   ],
-  "cashWeight": 14.9,
-  "creditWeight": 14.2,
+  "cashWeight": 15.0,
+  "creditWeight": 14.1,
   "currentBlendedReturn": 31.23,
   "twrCumulative": 137.3
 }

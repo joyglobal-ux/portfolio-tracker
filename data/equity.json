@@ -105,14 +105,14 @@
       "month": "2026-07",
       "size": 421.1,
       "twr": 200.0,
-      "ytd": 161.14,
+      "ytd": 161.25,
       "target": 164.0,
-      "monthly": -11.64,
+      "monthly": -11.58,
       "depositIdx": -15.3
     },
     {
       "month": "2026-08",
-      "size": 356.8,
+      "size": 357.1,
       "twr": null,
       "ytd": null,
       "target": 169.3,

@@ -1,9 +1,9 @@
 {
-  "lastUpdated": "2026-07-28",
+  "lastUpdated": "2026-07-29",
   "fxRate": 1520,
-  "sizeIndex": 309.0,
-  "twrCumulative": 74.0,
-  "ytdReturn": 40.45,
+  "sizeIndex": 285.7,
+  "twrCumulative": 61.0,
+  "ytdReturn": 30.36,
   "targetIndex": 169.3,
   "indexBase": "2025-08 = 100",
   "goal": {

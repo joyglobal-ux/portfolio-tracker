@@ -29,7 +29,7 @@
   .hsub{font-size:12.5px;color:var(--muted);margin-top:3px}
   .hmeta{font-size:11.5px;color:var(--faint);text-align:right;font-variant-numeric:tabular-nums}
 
-  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:16px}
+  .kpis{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:16px}
   .kpi{background:var(--panel2);border:1px solid var(--line);border-radius:11px;padding:11px 12px}
   .kpi .k{font-size:11px;color:var(--muted)}
   .kpi .v{font-size:21px;font-weight:800;font-variant-numeric:tabular-nums;margin-top:2px}
@@ -205,7 +205,7 @@
   </section>
 
   <section>
-    <div class="stitle"><span class="ico">🎯</span>성과 추이 <small>· 입금 제외 순수 운용 수익률(TWR)</small></div>
+    <div class="stitle"><span class="ico">🎯</span>성과 추이 <small>· TWR(입금 제외, 자본크기 무시) — 실제 돈 기준은 상단 MWR</small></div>
     <div class="card">
       <div class="legend">
         <span><span class="lg-line" style="background:#BA7517"></span>누적 (2025·08~)</span>
@@ -291,10 +291,16 @@ function renderHeader(m){
   document.getElementById('hsub').textContent='작전 '+m.operation+' · 다음 게이트 '+m.nextGate;
   document.getElementById('hmeta').innerHTML='업데이트 '+m.lastUpdated+'<br>환율 '+fmt(m.fxRate)+' · 지수 '+m.indexBase;
   const targetPct=Math.round(m.sizeIndex/m.targetIndex*100);
+  // 부호 있는 표기 — 마이너스 구간에서도 깨지지 않게(과거 '+' 하드코딩 버그)
+  const sg=v=>(v>=0?'+':'')+v.toFixed(1)+'%';
+  const cl=v=>v>=0?'pos':'neg';
+  const asOf=m.asOfMonth?m.asOfMonth.replace('-','·')+'까지':'';
+  const yr=(m.asOfMonth||'').slice(0,4);
   const kpis=[
     {k:'규모 지수',v:m.sizeIndex.toFixed(0),s:m.indexBase,cls:''},
-    {k:'누적 성과 (2025·08~)',v:'+'+m.twrCumulative.toFixed(1)+'%',s:'입금 제외 TWR',cls:'pos'},
-    {k:'올해 (2026 YTD)',v:'+'+m.ytdReturn.toFixed(1)+'%',s:'6월까지',cls:'pos'},
+    {k:'올해 TWR ('+yr+')',v:sg(m.ytdReturn),s:'월수익률 체이닝 · 자본크기 무시 · '+asOf,cls:cl(m.ytdReturn)},
+    {k:'올해 MWR ('+yr+')',v:m.mwrYtd!=null?sg(m.mwrYtd):'—',s:'실제 돈 기준 · 투입 타이밍 반영',cls:m.mwrYtd!=null?cl(m.mwrYtd):''},
+    {k:'누적 (2025·08~)',v:sg(m.twrCumulative),s:'TWR'+(m.mwrInception!=null?' · MWR '+sg(m.mwrInception):''),cls:cl(m.twrCumulative)},
     {k:'목표 대비',v:targetPct+'%',s:'규모 '+m.sizeIndex.toFixed(0)+' / 목표 '+m.targetIndex.toFixed(0),cls:targetPct>=100?'pos':'neg'}
   ];
   const box=document.getElementById('kpis');

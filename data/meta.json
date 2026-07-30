@@ -1,9 +1,9 @@
 {
   "lastUpdated": "2026-07-30",
   "fxRate": 1520,
-  "sizeIndex": 233.6,
+  "sizeIndex": 233.5,
   "twrCumulative": 46.7,
-  "ytdReturn": 18.49,
+  "ytdReturn": 18.47,
   "targetIndex": 169.3,
   "indexBase": "2025-08 = 100",
   "goal": {
@@ -19,12 +19,13 @@
     },
     {
       "year": "2026",
-      "ret": 144.77,
-      "note": "YTD · MU 게이트 통과 (6/24)"
+      "ret": 18.47,
+      "note": "YTD TWR · 실제 돈 기준 MWR -22.2% (7월 -35%)",
+      "mwr": -22.2
     }
   ],
-  "operation": "risk-on (MU blowout 후 메모리 추세 확정)",
-  "nextGate": "2Q 어닝시즌 (7월) · 삼성·하이닉스 잠정실적 — FOMC·마이크론(6/24) 통과",
+  "operation": "리스크 축소 · 손절선 감시 (7월 메모리 급락)",
+  "nextGate": "빅테크 FY27 capex 가이던스 — AI 수익화 판정 (CAPEX 게이트 워치)",
   "principlesNote": "헌법(Ground rules) — 거의 안 변하는 신념. 그 아래 ②전략(국면)·③전술(집행)이 매달린다.",
   "principles": [
     {
@@ -51,5 +52,9 @@
       "title": "수익은 길게, 손실은 짧게",
       "body": "이 비대칭이 장기 생존의 핵심. (어떻게 = 전술, 믿는다 = 헌법)"
     }
-  ]
+  ],
+  "mwrYtd": -22.2,
+  "mwrInception": -12.3,
+  "pnlIdxYtd": -40.22,
+  "asOfMonth": "2026-07"
 }

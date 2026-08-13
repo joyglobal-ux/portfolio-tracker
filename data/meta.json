@@ -1,9 +1,9 @@
 {
-  "lastUpdated": "2026-08-12",
+  "lastUpdated": "2026-08-13",
   "fxRate": 1520,
-  "sizeIndex": 267.9,
-  "twrCumulative": 62.4,
-  "ytdReturn": 31.16,
+  "sizeIndex": 308.2,
+  "twrCumulative": 71.2,
+  "ytdReturn": 38.23,
   "targetIndex": 174.6,
   "indexBase": "2025-08 = 100",
   "goal": {
@@ -53,8 +53,8 @@
       "body": "이 비대칭이 장기 생존의 핵심. (어떻게 = 전술, 믿는다 = 헌법)"
     }
   ],
-  "mwrYtd": -4.3,
-  "mwrInception": 11.0,
-  "pnlIdxYtd": -8.23,
+  "mwrYtd": 3.1,
+  "mwrInception": 20.7,
+  "pnlIdxYtd": 6.09,
   "asOfMonth": "2026-08"
 }

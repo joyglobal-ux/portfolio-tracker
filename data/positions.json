@@ -1,6 +1,6 @@
 {
   "_comment": "현재 보유 포지션. weight=평가비중(%), ret=현 보유분 수익률(%, 포트 수익률 아님), 원화 비노출. 수동 갱신(자동 아님).",
-  "asOf": "2026-08-14",
+  "asOf": "2026-08-17",
   "holdings": [
     {
       "ticker": "000660",
@@ -8,7 +8,7 @@
       "tag": "코어",
       "tagColor": "hold",
       "sector": "반도체/HBM",
-      "weight": 40.9,
+      "weight": 41.0,
       "ret": 16.03,
       "credit": false,
       "thesis": "HBM 2026 완판 + 엔비디아 70% + Q1 OPM 72%. 추세 대장, MU blowout 후 신고가 2,917,000.",
@@ -21,7 +21,7 @@
       "tag": "증량",
       "tagColor": "go",
       "sector": "반도체/HBM",
-      "weight": 17.5,
+      "weight": 17.6,
       "ret": -31.31,
       "credit": false,
       "thesis": "신규 계좌 시딩(6/30 시작) + 일지 #1 계획 실행 — 7/6 하락일(-3.4%) 13주 추가(~32M, 계획 43M의 일부 분할).",
@@ -34,7 +34,7 @@
       "tag": "신규",
       "tagColor": "go",
       "sector": "",
-      "weight": 15.1,
+      "weight": 15.2,
       "ret": -3.73,
       "credit": false,
       "thesis": "(자동 추가 — thesis 입력 필요)",
@@ -74,7 +74,7 @@
       "tagColor": "go",
       "sector": "",
       "weight": 4.6,
-      "ret": -5.31,
+      "ret": -6.2,
       "credit": false,
       "thesis": "(자동 추가 — thesis 입력 필요)",
       "stop": "",

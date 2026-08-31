@@ -4,7 +4,7 @@
   "sizeIndex": 360.0,
   "twrCumulative": 88.8,
   "ytdReturn": 52.48,
-  "targetIndex": 179.9,
+  "targetIndex": 174.6,
   "indexBase": "2025-08 = 100",
   "goal": {
     "targetIndex": 1000,
@@ -53,8 +53,8 @@
       "body": "이 비대칭이 장기 생존의 핵심. (어떻게 = 전술, 믿는다 = 헌법)"
     }
   ],
-  "mwrYtd": 16.4,
-  "mwrInception": 37.3,
+  "mwrYtd": 17.5,
+  "mwrInception": 40.2,
   "pnlIdxYtd": 34.93,
-  "asOfMonth": "2026-09"
+  "asOfMonth": "2026-08"
 }

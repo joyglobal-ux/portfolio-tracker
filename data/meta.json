@@ -1,9 +1,9 @@
 {
   "lastUpdated": "2026-08-31",
-  "fxRate": 1369.0,
+  "fxRate": 1368.0,
   "sizeIndex": 360.0,
   "twrCumulative": 88.8,
-  "ytdReturn": 52.48,
+  "ytdReturn": 52.45,
   "targetIndex": 179.9,
   "indexBase": "2025-08 = 100",
   "goal": {
@@ -55,7 +55,7 @@
   ],
   "mwrYtd": 16.4,
   "mwrInception": 37.3,
-  "pnlIdxYtd": 34.93,
+  "pnlIdxYtd": 34.86,
   "asOfMonth": "2026-09",
   "leverage": {
     "asOf": "2026-08-31",

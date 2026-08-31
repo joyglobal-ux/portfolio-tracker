@@ -19,14 +19,26 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      # 구글 시트 게시 CSV가 간헐적으로 타임아웃(2026-08-31 실패 사례) → 3회 재시도.
+      # 재시도 없이는 한 번의 일시적 장애로 그날 데이터가 통째로 누락된다.
       - name: 스냅샷 갱신 (규모·성과)
         env:
           SHEET_CSV_URL: ${{ secrets.SHEET_CSV_URL }}
-        run: python scripts/update_snapshot.py
+        run: |
+          for i in 1 2 3; do
+            python scripts/update_snapshot.py && exit 0
+            echo "attempt $i failed"; [ $i -lt 3 ] && sleep 30
+          done
+          exit 1
       - name: 보유종목 갱신 (비중·수익률)
         env:
           HOLDINGS_CSV_URL: ${{ secrets.HOLDINGS_CSV_URL }}
-        run: python scripts/update_holdings.py
+        run: |
+          for i in 1 2 3; do
+            python scripts/update_holdings.py && exit 0
+            echo "attempt $i failed"; [ $i -lt 3 ] && sleep 30
+          done
+          exit 1
       - name: 변경분 커밋
         run: |
           git config user.name "portfolio-bot"

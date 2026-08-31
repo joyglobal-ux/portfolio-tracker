@@ -279,14 +279,11 @@ const C={txt:'#e8eaf0',muted:'#9aa3b2',faint:'#6b7280',grid:'rgba(154,163,178,0.
 const fmt=n=>(n==null?'–':Number(n).toLocaleString('ko-KR'));
 const el=(t,c,h)=>{const e=document.createElement(t);if(c)e.className=c;if(h!=null)e.textContent=h;return e;};
 
-Promise.all([
-  fetch('data/meta.json').then(r=>r.json()),
-  fetch('data/equity.json').then(r=>r.json()),
-  fetch('data/positions.json').then(r=>r.json()),
-  fetch('data/journal.json').then(r=>r.json()),
-  fetch('data/watchlist.json').then(r=>r.json()),
-  fetch('data/log.json').then(r=>r.json())
-]).then(([meta,eq,pos,jr,wl,log])=>{
+// 캐시버스터 필수 — 없으면 브라우저가 옛 JSON을 재사용해 '갱신 안 됨'으로 보인다(2026-08-31 확인).
+// index.html 은 새로 받아도 data/*.json 이 캐시되면 화면이 과거 상태로 렌더된다.
+const TS='?ts='+Date.now();
+const load=n=>fetch('data/'+n+'.json'+TS,{cache:'no-store'}).then(r=>r.json());
+Promise.all([load('meta'),load('equity'),load('positions'),load('journal'),load('watchlist'),load('log')]).then(([meta,eq,pos,jr,wl,log])=>{
   renderHeader(meta,eq);
   renderGoal(meta);
   renderSizeChart(eq);

@@ -64,6 +64,20 @@ def main():
     if c_name is None or c_wt is None:
         raise SystemExit("종목명/평가비중 칼럼을 못 찾음")
 
+    # 환율: 시트 상단 '환율' 라벨 바로 옆 셀 (meta.fxRate 가 수동이라 스테일해지던 문제)
+    fx = None
+    for r in rows[:hidx + 1]:
+        for i, c in enumerate(r):
+            if norm(c) == "환율":
+                for nxt in r[i + 1:]:
+                    v = ppct(nxt)
+                    if v and v > 100:
+                        fx = round(v, 1)
+                        break
+                break
+        if fx:
+            break
+
     sheet, cash = [], 0.0
     for r in rows[hidx + 1:]:
         name = (cell(r, c_name) or "").strip()
@@ -122,6 +136,16 @@ def main():
     with open(POS, "w", encoding="utf-8") as f:
         json.dump(pos, f, ensure_ascii=False, indent=2)
         f.write("\n")
+
+    if fx:
+        mp = os.path.join(ROOT, "data", "meta.json")
+        with open(mp, encoding="utf-8") as f:
+            meta = json.load(f)
+        meta["fxRate"] = fx
+        with open(mp, "w", encoding="utf-8") as f:
+            json.dump(meta, f, ensure_ascii=False, indent=2)
+            f.write("\n")
+        print("환율 갱신:", fx)
 
     print("갱신: {}종목 · 현금 {}% · 신용 {}% · asOf {}".format(
         len(merged), pos["cashWeight"], pos["creditWeight"], pos["asOf"]))

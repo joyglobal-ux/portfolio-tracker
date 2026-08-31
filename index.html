@@ -29,7 +29,7 @@
   .hsub{font-size:12.5px;color:var(--muted);margin-top:3px}
   .hmeta{font-size:11.5px;color:var(--faint);text-align:right;font-variant-numeric:tabular-nums}
 
-  .kpis{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:16px}
+  .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(132px,1fr));gap:10px;margin-top:16px}
   .kpi{background:var(--panel2);border:1px solid var(--line);border-radius:11px;padding:11px 12px}
   .kpi .k{font-size:11px;color:var(--muted)}
   .kpi .v{font-size:21px;font-weight:800;font-variant-numeric:tabular-nums;margin-top:2px}
@@ -54,6 +54,8 @@
   .wlist .row{display:flex;align-items:center;gap:7px;padding:4px 0}
   .dot{width:9px;height:9px;border-radius:2px;flex-shrink:0}
   .wlist .nm{flex:1} .wlist .pct{color:var(--muted);font-variant-numeric:tabular-nums}
+  .wlist .crd{font-size:10px;font-weight:700;color:#fcd34d;background:var(--wait-bg);
+    border-radius:5px;padding:1px 5px;font-variant-numeric:tabular-nums}
 
   .pcard{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:13px 15px;border-left-width:4px;border-left-style:solid;margin-bottom:10px}
   .pcard.go{border-left-color:var(--go)} .pcard.stop{border-left-color:var(--stop)}
@@ -271,7 +273,7 @@ Promise.all([
   fetch('data/watchlist.json').then(r=>r.json()),
   fetch('data/log.json').then(r=>r.json())
 ]).then(([meta,eq,pos,jr,wl,log])=>{
-  renderHeader(meta);
+  renderHeader(meta,eq);
   renderGoal(meta);
   renderSizeChart(eq);
   renderTwrChart(eq);
@@ -287,7 +289,7 @@ Promise.all([
   document.getElementById('hsub').textContent='데이터 로드 실패: '+e.message;
 });
 
-function renderHeader(m){
+function renderHeader(m,eq){
   document.getElementById('hsub').textContent='작전 '+m.operation+' · 다음 게이트 '+m.nextGate;
   document.getElementById('hmeta').innerHTML='업데이트 '+m.lastUpdated+'<br>환율 '+fmt(m.fxRate)+' · 지수 '+m.indexBase;
   const targetPct=Math.round(m.sizeIndex/m.targetIndex*100);
@@ -296,8 +298,12 @@ function renderHeader(m){
   const cl=v=>v>=0?'pos':'neg';
   const asOf=m.asOfMonth?m.asOfMonth.replace('-','·')+'까지':'';
   const yr=(m.asOfMonth||'').slice(0,4);
+  // 최근 완료월 수익률 — equity 시계열에서 monthly가 있는 마지막 값
+  const done=(eq&&eq.series||[]).filter(s=>s.monthly!=null);
+  const lastM=done.length?done[done.length-1]:null;
   const kpis=[
     {k:'규모 지수',v:m.sizeIndex.toFixed(0),s:m.indexBase,cls:''},
+    ...(lastM?[{k:'월 수익률 ('+lastM.month.slice(5)+'월)',v:sg(lastM.monthly),s:'직전 완료월 · 자본 대비',cls:cl(lastM.monthly)}]:[]),
     {k:'올해 TWR ('+yr+')',v:sg(m.ytdReturn),s:'월수익률 체이닝 · 자본크기 무시 · '+asOf,cls:cl(m.ytdReturn)},
     {k:'올해 MWR ('+yr+')',v:m.mwrYtd!=null?sg(m.mwrYtd):'—',s:'실제 돈 기준 · 투입 타이밍 반영',cls:m.mwrYtd!=null?cl(m.mwrYtd):''},
     {k:'누적 (2025·08~)',v:sg(m.twrCumulative),s:'TWR'+(m.mwrInception!=null?' · MWR '+sg(m.mwrInception):''),cls:cl(m.twrCumulative)},
@@ -365,7 +371,19 @@ function renderAnnual(m){
 
 const DCOL=['#378ADD','#D85A30','#639922','#BA7517','#7F77DD','#1D9E75','#888780'];
 function renderDonut(pos){
-  const items=pos.holdings.map(h=>({n:h.name,w:h.weight})).concat([{n:'현금',w:pos.cashWeight}]);
+  // 같은 종목은 계좌(2nd)·신용을 가리지 않고 하나로 합친다 — 알고 싶은 건 '그 종목에 대한 익스포저'.
+  // 신용분은 합산에 포함하되, 얼마가 레버리지인지 별도로 표시한다.
+  const base=t=>String(t||'').replace(/C$/,'');            // 000660C -> 000660
+  const clean=n=>String(n).replace(/^\(\d+(st|nd|rd|th)\)\s*/,'').replace(/\s*\((신용|레버리지)\)\s*/,'').trim();
+  const g={};
+  pos.holdings.forEach(h=>{
+    const k=base(h.ticker)||clean(h.name);
+    if(!g[k]) g[k]={n:clean(h.name),w:0,credit:0,accts:0};
+    g[k].w+=h.weight||0;
+    if(h.credit) g[k].credit+=h.weight||0;
+    g[k].accts++;
+  });
+  const items=Object.values(g).concat([{n:'현금',w:pos.cashWeight,credit:0,accts:1}]);
   items.sort((a,b)=>b.w-a.w);
   new Chart(document.getElementById('donut'),{
     type:'doughnut',
@@ -378,6 +396,10 @@ function renderDonut(pos){
     const d=el('span','dot');d.style.background=DCOL[i%DCOL.length];
     r.appendChild(d);
     r.appendChild(el('span','nm',it.n));
+    if(it.credit>0){
+      const c=el('span','crd','신용 '+it.credit.toFixed(1)+'%');
+      r.appendChild(c);
+    }
     r.appendChild(el('span','pct',it.w.toFixed(1)+'%'));
     wl.appendChild(r);
   });

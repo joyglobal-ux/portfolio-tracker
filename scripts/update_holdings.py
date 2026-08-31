@@ -131,6 +131,14 @@ def main():
     pos["holdings"] = merged
     pos["cashWeight"] = round(cash, 1)
     pos["creditWeight"] = round(sum(h["weight"] for h in merged if h.get("credit")), 1)
+    # 신용 '융자잔액' 비율 = 매입금액 / 평가액. 원화를 읽지 않고 유도한다:
+    #   매입금액 = 평가금액 / (1+수익률)  →  매입비중 = 평가비중 / (1+수익률)
+    # (평가비중 7.3% · 수익률 -22.21% → 9.4%. creditWeight(시가 7.3%)와는 다른 값이다.)
+    cd = 0.0
+    for h in merged:
+        if h.get("credit") and h.get("ret") is not None:
+            cd += h["weight"] / (1 + h["ret"] / 100.0)
+    pos["creditDebtPct"] = round(cd, 1)
     pos["asOf"] = datetime.datetime.utcnow().strftime("%Y-%m-%d")
 
     with open(POS, "w", encoding="utf-8") as f:

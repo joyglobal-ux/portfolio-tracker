@@ -123,5 +123,6 @@
   "cashWeight": 2.8,
   "creditWeight": 7.3,
   "currentBlendedReturn": 31.23,
-  "twrCumulative": 137.3
+  "twrCumulative": 137.3,
+  "creditDebtPct": 9.4
 }

@@ -57,6 +57,19 @@
   .wlist .crd{font-size:10px;font-weight:700;color:#fcd34d;background:var(--wait-bg);
     border-radius:5px;padding:1px 5px;font-variant-numeric:tabular-nums}
 
+  /* 자본구조 — 도넛은 gross 100%로 닫히므로 그중 얼마가 빌린 돈인지 따로 보여준다 */
+  .lev{margin-top:14px;padding-top:13px;border-top:1px solid var(--line)}
+  .lev-top{display:flex;align-items:baseline;gap:9px;flex-wrap:wrap;margin-bottom:10px}
+  .lev-lab{font-size:12px;font-weight:800;color:var(--muted)}
+  .lev-exp{font-size:19px;font-weight:800;font-variant-numeric:tabular-nums}
+  .lev-sub{font-size:11px;color:var(--faint);margin-left:auto;font-variant-numeric:tabular-nums}
+  .lev-bar{display:flex;height:9px;border-radius:5px;overflow:hidden;background:var(--bg);margin-bottom:9px}
+  .lev-bar i{display:block;height:100%}
+  .lev-row{display:flex;align-items:center;gap:8px;font-size:12px;padding:3px 0}
+  .lev-row .kk{font-size:10.5px;font-weight:800;padding:2px 7px;border-radius:5px;white-space:nowrap}
+  .lev-row .vv{font-variant-numeric:tabular-nums;font-weight:700;min-width:46px}
+  .lev-row .nn{color:var(--faint);font-size:11.5px}
+
   .pcard{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:13px 15px;border-left-width:4px;border-left-style:solid;margin-bottom:10px}
   .pcard.go{border-left-color:var(--go)} .pcard.stop{border-left-color:var(--stop)}
   .pcard.wait{border-left-color:var(--wait)} .pcard.hold{border-left-color:var(--hold)}
@@ -225,6 +238,7 @@
         <div class="donut-box"><canvas id="donut"></canvas></div>
         <div class="wlist" id="wlist"></div>
       </div>
+      <div id="lev"></div>
     </div>
   </section>
 
@@ -279,6 +293,7 @@ Promise.all([
   renderTwrChart(eq);
   renderAnnual(meta);
   renderDonut(pos);
+  renderLeverage(meta,pos);
   renderPositions(pos);
   renderLog(log,pos);
   renderJournal(jr);
@@ -403,6 +418,46 @@ function renderDonut(pos){
     r.appendChild(el('span','pct',it.w.toFixed(1)+'%'));
     wl.appendChild(r);
   });
+}
+
+// 자본구조: 평가액(신용포함) 100%를 자기자본/신용/대출로 쪼개고 실질 익스포저를 계산한다.
+// 원화 금액은 노출하지 않는다 — 대출은 지수(loanIdx)로 저장하고 sizeIndex 대비 %로 환산.
+function renderLeverage(m,pos){
+  const L=m.leverage; if(!L) return;
+  const loanPct  = (L.loanIdx&&m.sizeIndex) ? L.loanIdx/m.sizeIndex*100 : 0;
+  const credPct  = pos.creditDebtPct || 0;                 // 신용 융자잔액 / 평가액
+  const debtPct  = credPct + loanPct;
+  const equityPct= 100 - debtPct;
+  const stockPct = 100 - (pos.cashWeight||0);
+  const exposure = equityPct>0 ? stockPct/equityPct*100 : 0;
+  const cap=m.exposureCap||120;
+  const over=exposure>cap;
+
+  const rows=[];
+  if(credPct>0) rows.push({k:'신용',c:'var(--stop-bg)',t:'#fca5a5',v:credPct,n:L.creditNote||''});
+  if(loanPct>0) rows.push({k:'담보대출',c:'var(--wait-bg)',t:'#fcd34d',v:loanPct,
+    n:(L.loanCollateral?'담보 '+L.loanCollateral+' · ':'')+(L.loanNote||'')});
+
+  document.getElementById('lev').innerHTML=
+    '<div class="lev">'+
+      '<div class="lev-top">'+
+        '<span class="lev-lab">자본구조</span>'+
+        '<span class="lev-exp" style="color:'+(over?'var(--stop)':'var(--txt)')+'">익스포저 '+exposure.toFixed(1)+'%</span>'+
+        (over?'<span class="ptag tag-stop">상한 '+cap+'% 초과</span>':'')+
+        '<span class="lev-sub">자기자본 '+equityPct.toFixed(1)+'% · 차입 '+debtPct.toFixed(1)+'%</span>'+
+      '</div>'+
+      '<div class="lev-bar">'+
+        '<i style="width:'+equityPct.toFixed(1)+'%;background:#378ADD"></i>'+
+        '<i style="width:'+credPct.toFixed(1)+'%;background:#ef4444"></i>'+
+        '<i style="width:'+loanPct.toFixed(1)+'%;background:#f59e0b"></i>'+
+      '</div>'+
+      rows.map(r=>'<div class="lev-row">'+
+        '<span class="kk" style="background:'+r.c+';color:'+r.t+'">'+r.k+'</span>'+
+        '<span class="vv">'+r.v.toFixed(1)+'%</span>'+
+        '<span class="nn">'+r.n+'</span></div>').join('')+
+      '<div class="lev-row"><span class="nn">평가액 대비 비율 · 익스포저 = 주식 ÷ 자기자본'+
+        (L.asOf?' · 대출 기준일 '+L.asOf:'')+'</span></div>'+
+    '</div>';
 }
 
 function renderPositions(pos){

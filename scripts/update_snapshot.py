@@ -126,6 +126,17 @@ def main():
     if not raw:
         raise SystemExit("파싱된 데이터 행 없음 — CSV 구조 확인 필요")
 
+    # 시트가 미래 월 행까지 현재 평가액으로 미리 채우는 경우가 있다(2026-08-31 확인:
+    # 9월·10월 행에 동일 값이 들어가 9월이 '완료월 +0.0%'라는 유령 데이터로 잡혔다).
+    # '이번 달 + 1'까지만 남긴다 — 다음 달 행은 기말 평가액(= 현재값) 제공용으로 필요하고,
+    # 그 이후 행은 전부 수식 잔재다.
+    now = datetime.datetime.utcnow() + datetime.timedelta(hours=9)  # KST 기준
+    cutoff = "{}-{:02d}".format(now.year + (now.month // 12), now.month % 12 + 1)
+    dropped = [x["month"] for x in raw if x["month"] > cutoff]
+    raw = [x for x in raw if x["month"] <= cutoff]
+    if dropped:
+        print("미래 행 제외:", ", ".join(dropped))
+
     base = raw[0]["size"]
     # 마지막 평가액 행 = '진행중' 월. 그 행의 수익금·수익률은 다음 달 평가액이 없어
     # -100%로 깨져 있으므로 성과 수치를 전부 버린다(값이 아니라 위치로 판정).

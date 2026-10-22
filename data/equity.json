@@ -145,21 +145,11 @@
     {
       "month": "2026-10",
       "size": 362.7,
-      "twr": 132.0,
-      "ytd": 106.52,
-      "target": 179.9,
-      "monthly": -31.03,
-      "depositIdx": -10.3,
-      "pnlIdx": -112.54
-    },
-    {
-      "month": "2026-11",
-      "size": 239.9,
       "twr": null,
       "ytd": null,
-      "target": 185.2,
+      "target": 179.9,
       "monthly": null,
-      "depositIdx": 0,
+      "depositIdx": -10.3,
       "pnlIdx": null
     }
   ]

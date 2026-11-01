@@ -202,11 +202,8 @@ def main():
         json.dump(meta, f, ensure_ascii=False, indent=2)
         f.write("\n")
 
-    print("갱신 완료: {}개월 · 완료월 {} · 규모지수 {}".format(
-        len(series), meta.get("asOfMonth"), latest["size"]))
-    print("  TWR  누적 {}% · 올해 {}%".format(meta.get("twrCumulative"), meta.get("ytdReturn")))
-    print("  MWR  누적 {}% · 올해 {}%  (손익지수 {})".format(
-        meta.get("mwrInception"), meta.get("mwrYtd"), meta.get("pnlIdxYtd")))
+    # Actions 로그는 public — 값(규모·수익률·비중)은 찍지 않는다. 건수와 날짜만.
+    print("갱신 완료: {}개월 · 완료월 {}".format(len(series), meta.get("asOfMonth")))
 
 
 if __name__ == "__main__":

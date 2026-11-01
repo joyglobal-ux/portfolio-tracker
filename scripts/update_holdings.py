@@ -155,10 +155,8 @@ def main():
             f.write("\n")
         print("환율 갱신:", fx)
 
-    print("갱신: {}종목 · 현금 {}% · 신용 {}% · asOf {}".format(
-        len(merged), pos["cashWeight"], pos["creditWeight"], pos["asOf"]))
-    for h in merged:
-        print("  {}: 비중 {}% · 수익 {}%".format(h["name"], h["weight"], h["ret"]))
+    # Actions 로그는 public — 종목명·비중·수익률은 찍지 않는다. 건수와 날짜만.
+    print("갱신: {}종목 · asOf {}".format(len(merged), pos["asOf"]))
 
 
 if __name__ == "__main__":

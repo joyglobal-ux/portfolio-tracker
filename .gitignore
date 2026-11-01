@@ -1,0 +1,4 @@
+.DS_Store
+# 평문 데이터는 절대 커밋하지 않는다 — 공개되는 건 data/vault.json(암호문)뿐
+data/*.json
+!data/vault.json
